@@ -1,3 +1,8 @@
 *.out
 *.o
 *.ko
+*.o.*
+*.ko.*
+*.mod.*
+*.order
+*.symvers
