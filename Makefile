@@ -9,10 +9,11 @@ TARGETS = $(patsubst %.cc,%,$(CPPFILES))
 
 all: $(TARGETS)
 
-%: %.cc
+%: %.cc cycles.h
 	$(CC) -Wall -O0 -std=c++11 -o $@ $<
 
 .PHONY: clean
 
 clean:
 	rm -rf $(OFILES) $(TARGETS)
+
