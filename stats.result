@@ -1,0 +1,72 @@
+#####
+switch_process.txt
+num: 10000
+std: 56791.6506776
+mean: 324971.363636
+#####
+test_thread_create.txt
+num: 10000
+std: 128054.080283
+mean: 737449.074727
+#####
+test_thread_switch.txt
+num: 10000
+std: 43245.5764617
+mean: 96308.4724211
+#####
+sys_call.txt
+num: 10000
+std: 23346.560098
+mean: 86195.8598898
+#####
+measurement.txt
+num: 10000
+std: 0.349768637854
+mean: 16.4550542319
+#####
+test_proc.txt
+#
+time dict of: 0
+num: 10000
+std: 77.4400673837
+mean: 264.344606121
+#
+time dict of: 1
+num: 10000
+std: 130.430446631
+mean: 355.575915183
+#
+time dict of: 2
+num: 10000
+std: 43.3506791094
+mean: 282.619176707
+#
+time dict of: 3
+num: 10000
+std: 46.8088715267
+mean: 280.710301936
+#
+time dict of: 4
+num: 10000
+std: 40.7758794833
+mean: 300.901678898
+#
+time dict of: 5
+num: 10000
+std: 39.2984630892
+mean: 408.472166399
+#
+time dict of: 6
+num: 10000
+std: 67.1147210692
+mean: 349.102252162
+#
+time dict of: 7
+num: 10000
+std: 31.4086153003
+mean: 380.061325023
+#####
+create_process.txt
+num: 10000
+std: 105158.712758
+mean: 879312.339642
