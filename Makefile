@@ -16,4 +16,7 @@ all: $(TARGETS)
 
 clean:
 	rm -rf $(OFILES) $(TARGETS)
+	rm *.txt
 
+clean_result:
+	rm *.txt
