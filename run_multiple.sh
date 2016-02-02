@@ -8,7 +8,7 @@ do
     f="${f%.*}"
     echo "#####"
     echo "running "$f
-    for i in {1..100}
+    for i in {1..100000}
     do
         # ./$f | tee -a $f".txt"
         ./$f >> $f".txt"
