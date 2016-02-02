@@ -1,1 +1,0 @@
-cmd_/home/pi/raspbian-ccr/enable-ccr.ko := ld -EL -r  -T /usr/src/linux-headers-3.2.27+/scripts/module-common.lds --build-id  -o /home/pi/raspbian-ccr/enable-ccr.ko /home/pi/raspbian-ccr/enable-ccr.o /home/pi/raspbian-ccr/enable-ccr.mod.o
