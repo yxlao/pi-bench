@@ -1,7 +1,5 @@
 #include <iostream>
-// #include "raspbian-ccr/cycles.c"
 #include "cycles.h"
-// #include <cstdint>
 using namespace std;
 
 int main() {
@@ -14,8 +12,7 @@ int main() {
         GET_CCNT(start);
         GET_CCNT(end);
         total += end - start;
-        // cout << start << "," << end << "," << end - start << endl;
     }
-    cout << "average: " << 1. * total / 1000000 << endl;
+    cout << 1. * total / 1000000 << endl;
     return 0;
 }
