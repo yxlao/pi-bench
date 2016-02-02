@@ -17,13 +17,13 @@ int main() {
     RESET;
     pthread_t tid;
     unsigned long total = 0;
-    unsigned long total1 = 0;
+    // unsigned long total1 = 0;
     for (int i = 0; i < STD_ITER; ++i) {
        // pipe(fd);
         pthread_create(&tid, NULL, RunThread, NULL);
        // read(fd[0], &start_time, 1);
         GET_CCNT(start_time);
-        pthread_join(tid, NULL); 
+        pthread_join(tid, NULL);
        // GET_CCNT(end_time);
         total += end_time - start_time;
        // total1 += end_time - start;
