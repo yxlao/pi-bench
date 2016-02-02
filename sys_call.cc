@@ -1,21 +1,20 @@
 #include <iostream>
 #include <unistd.h>
+#include <sys/syscall.h>
 #include "cycles.h"
 using namespace std;
 
 int main() {
     RESET;
-    int temp;
     unsigned start;
     unsigned end;
     unsigned total = 0;
-    for (int i = 0; i < 1000000; ++i) {
+    for (int i = 0; i < STD_ITER; ++i) {
         GET_CCNT(start);
-        temp = getpid();
+        getpid();
         GET_CCNT(end);
         total += end - start;
     }
-    cout << temp << endl;
-    cout << "average: " << 1. * total / 1000000 << endl;
+    cout << 1. * total / STD_ITER << endl;
     return 0;
 }
