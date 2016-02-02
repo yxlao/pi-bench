@@ -3,6 +3,7 @@
 !Makefile
 !rasbian-crr/*
 
+*.txt
 *.out
 *.o
 *.ko
