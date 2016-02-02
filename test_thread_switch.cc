@@ -29,6 +29,6 @@ int main() {
        // total1 += end_time - start;
         // cout << start << "," << end << "," << end - start << endl;
     }
-    cout << "average: " << 1. * total / STD_ITER <<" " << 1. * total / STD_ITER << endl;
+    cout << 1. * total / STD_ITER <<" " << 1. * total / STD_ITER << endl;
     return 0;
 }
