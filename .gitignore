@@ -1,3 +1,8 @@
+*
+!*.*
+!Makefile
+!rasbian-crr/*
+
 *.out
 *.o
 *.ko
