@@ -19,7 +19,7 @@ int main() {
     // pid_t
     pid_t cpid;
 
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
         // get start
         GET_CCNT(start);
         // fork
@@ -35,6 +35,6 @@ int main() {
         }
         total += end - start;
     }
-    cout << 1. * total / STD_ITER << endl;
+    cout << 1. * total / NUM_ITER << endl;
     return 0;
 }

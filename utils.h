@@ -11,7 +11,12 @@
                         asm volatile("mrc p15, 0, %0, c15, c12, 1" : "=r"(value));\
                         asm volatile("FMSTAT");
 
-#define STD_ITER 1
+// experiment repetitions
+#define NUM_TRAIL  1
+#define NUM_ITER   100
+#define NUM_UNROLL 10
+
+// start and end time
 unsigned long start_time;
 unsigned long end_time;
 

@@ -9,12 +9,12 @@ int main() {
     unsigned start;
     unsigned end;
     unsigned total = 0;
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
         GET_CCNT(start);
         getpid();
         GET_CCNT(end);
         total += end - start;
     }
-    cout << 1. * total / STD_ITER << endl;
+    cout << 1. * total / NUM_ITER << endl;
     return 0;
 }

@@ -18,7 +18,7 @@ int main() {
     pthread_t tid;
     unsigned long total = 0;
     // unsigned long total1 = 0;
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
        // pipe(fd);
         pthread_create(&tid, NULL, RunThread, NULL);
        // read(fd[0], &start_time, 1);
@@ -29,6 +29,6 @@ int main() {
        // total1 += end_time - start;
         // cout << start << "," << end << "," << end - start << endl;
     }
-    cout << 1. * total / STD_ITER <<" " << 1. * total / STD_ITER << endl;
+    cout << 1. * total / NUM_ITER <<" " << 1. * total / NUM_ITER << endl;
     return 0;
 }

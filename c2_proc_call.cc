@@ -39,76 +39,76 @@ int main() {
     // ccnt_clr();
     RESET_CCNT;
     unsigned total = 0;
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
         GET_CCNT(start_time);
         fun0();
         total += end_time - start_time;
         //cout << start - start << "," << end << "," << end - start << endl;
     }
-    cout << "procedure call 0: " << 1. * total / STD_ITER << endl;
+    cout << "procedure call 0: " << 1. * total / NUM_ITER << endl;
 
     RESET_CCNT;
     total = 0;
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
     	GET_CCNT(start_time);
         fun1(0);
         total += end_time - start_time;
     }
-    cout << "procedure call 1: " << 1. * total / STD_ITER << endl;
+    cout << "procedure call 1: " << 1. * total / NUM_ITER << endl;
 
     RESET_CCNT;
     total = 0;
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
     	GET_CCNT(start_time);
         fun2(0, 0);
         total += end_time - start_time;
     }
-    cout << "procedure call 2: " << 1. * total / STD_ITER << endl;
+    cout << "procedure call 2: " << 1. * total / NUM_ITER << endl;
 
     RESET_CCNT;
     total = 0;
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
     	GET_CCNT(start_time);
         fun3(0, 0, 0);
         total += end_time - start_time;
     }
-    cout << "procedure call 3: " << 1. * total / STD_ITER << endl;
+    cout << "procedure call 3: " << 1. * total / NUM_ITER << endl;
 
     RESET_CCNT;
     total = 0;
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
     	GET_CCNT(start_time);
         fun4(0, 0, 0, 0);
         total += end_time - start_time;
     }
-    cout << "procedure call 4: " << 1. * total / STD_ITER << endl;
+    cout << "procedure call 4: " << 1. * total / NUM_ITER << endl;
 
     RESET_CCNT;
     total = 0;
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
     	GET_CCNT(start_time);
         fun5(0, 0, 0, 0, 0);
         total += end_time - start_time;
     }
-    cout << "procedure call 5: " << 1. * total / STD_ITER << endl;
+    cout << "procedure call 5: " << 1. * total / NUM_ITER << endl;
 
     RESET_CCNT;
     total = 0;
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
     	GET_CCNT(start_time);
         fun6(0, 0, 0, 0, 0, 0);
         total += end_time - start_time;
     }
-    cout << "procedure call 6: " << 1. * total / STD_ITER << endl;
+    cout << "procedure call 6: " << 1. * total / NUM_ITER << endl;
 
     RESET_CCNT;
     total = 0;
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
     	GET_CCNT(start_time);
         fun7(0, 0, 0, 0, 0, 0, 0);
         total += end_time - start_time;
     }
-    cout << "procedure call 7: " << 1. * total / STD_ITER << endl;
+    cout << "procedure call 7: " << 1. * total / NUM_ITER << endl;
 
     return 0;
 }
