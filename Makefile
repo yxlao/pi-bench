@@ -1,24 +1,31 @@
 CC = g++
+CFLAGS = -Wall -O0 -std=c++11
 
+# headers
+HEADERS = $(wildcard *.h)
+
+# objects
+OBJECTS = $(patsubst %.cc, %.o, $(wildcard *.cc))
+
+# targets
 CPPTHREAD = $(wildcard *thread*.cc)
-CPPNORMAL = $(filter-out $(wildcard *thread*.cc), $(wildcard *.cc))
+CPPNORMAL = $(filter-out $(wildcard *thread*.cc) utils.cc, $(wildcard *.cc))
 CPPFILES = $(CPPNORMAL) $(CPPTHREAD)
-
 TARGETSTHREAD = $(patsubst %.cc,%,$(CPPTHREAD))
 TARGETSNORMAL = $(patsubst %.cc,%,$(CPPNORMAL))
 TARGETS = $(TARGETSNORMAL) $(TARGETSTHREAD)
 
-.PRECIOUS: $(OFILES)
+all: $(TARGETS)
 
-all: $(TARGETSTHREAD) $(TARGETSNORMAL)
+%.o: %.cc $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TARGETSTHREAD): $(CPPTHREAD)
-	$(CC) -pthread -Wall -O0 -std=c++11 -o $@ $@.cc
+$(TARGETS): $(OBJECTS)
+	echo "hello"
 
-$(TARGETSNORMAL): $(CPPNORMAL)
-	$(CC) -Wall -O0 -std=c++11 -o $@ $@.cc
+.PRECIOUS: $(OBJECTS)
 
-.PHONY: clean
+.PHONY: clean all
 
 clean:
-	rm -rf $(OFILES) $(TARGETS)
+	rm -rf $(OBJECTS) $(TARGETS)
