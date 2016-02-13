@@ -8,22 +8,22 @@ HEADERS = $(wildcard *.h)
 OBJECTS = $(patsubst %.cc, %.o, $(wildcard *.cc))
 
 # targets
-CPPTHREAD = $(wildcard *thread*.cc)
-CPPNORMAL = $(filter-out $(wildcard *thread*.cc) utils.cc, $(wildcard *.cc))
-CPPFILES = $(CPPNORMAL) $(CPPTHREAD)
-TARGETSTHREAD = $(patsubst %.cc,%,$(CPPTHREAD))
-TARGETSNORMAL = $(patsubst %.cc,%,$(CPPNORMAL))
-TARGETS = $(TARGETSNORMAL) $(TARGETSTHREAD)
+CPP_THREAD = $(wildcard *thread*.cc)
+CPP_NORMAL = $(filter-out $(wildcard *thread*.cc) utils.cc, $(wildcard *.cc))
+CPPFILES = $(CPP_NORMAL) $(CPP_THREAD)
+TARGETS_THREAD = $(patsubst %.cc,%,$(CPP_THREAD))
+TARGETS_NORMAL = $(patsubst %.cc,%,$(CPP_NORMAL))
+TARGETS = $(TARGETS_NORMAL) $(TARGETS_THREAD)
 
-all: $(TARGETSNORMAL) $(TARGETSTHREAD)
+all: $(TARGETS_NORMAL) $(TARGETS_THREAD)
 
 %.o: %.cc $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TARGETSTHREAD): % : %.o utils.o utils.h
+$(TARGETS_THREAD): % : %.o utils.o utils.h
 	$(CC) -pthread $(CFLAGS) utils.o $< -o $@
 
-$(TARGETSNORMAL): % : %.o utils.o utils.h
+$(TARGETS_NORMAL): % : %.o utils.o utils.h
 	$(CC) $(CFLAGS) utils.o $< -o $@
 
 .PRECIOUS: $(OBJECTS)
