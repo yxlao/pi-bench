@@ -23,10 +23,11 @@ int main() {
                 time_total += end - start;
             }
             if (j == 10) {
-                cout << "memory read time of size " << size << " is: " << 1. * time_total / NUM_ITER << endl;
+                cout << "memory read time of size " << size << " is: "
+                     << 1. * time_total / NUM_ITER << endl;
             }
         }
-        size = size * 2;  
+        size = size * 2;
     }
     return 0;
 }
