@@ -13,6 +13,9 @@ sudo dpkg -i linux-headers-4.1.17+_4.1.17+-2_armhf.deb
 
 ## Kernel module
 ```sh
+# compile
+cd raspbian-ccr/
+sudo make
 # to list current kernel module
 lsmod
 # to insert a kernel module
