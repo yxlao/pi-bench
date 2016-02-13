@@ -26,4 +26,8 @@ unsigned long time_start;
 unsigned long time_end;
 unsigned long time_total = 0;
 
+// utilities functions
+template <class T> float get_mean(T* data, int n);
+template <class T> float get_std(T* data, int n);
+
 #endif
