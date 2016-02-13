@@ -14,7 +14,7 @@
     asm volatile("FMSTAT");
 
 // experiment repetitions
-#define NUM_TRAIL  1
+#define NUM_TRIAL  1000
 #define NUM_ITER   100
 #define NUM_UNROLL 10
 
