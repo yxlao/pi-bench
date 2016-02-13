@@ -19,12 +19,12 @@
 #define NUM_UNROLL 10
 
 // store time of each trail
-unsigned long time_trials[NUM_TRIAL];
+extern unsigned long time_trials[NUM_TRIAL];
 
 // start and end time
-unsigned long time_start;
-unsigned long time_end;
-unsigned long time_total = 0;
+extern unsigned long time_start;
+extern unsigned long time_end;
+extern unsigned long time_total;
 
 // utilities functions
 template <class T> float get_mean(T* data, int n);

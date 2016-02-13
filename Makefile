@@ -21,10 +21,10 @@ all: $(TARGETSNORMAL) $(TARGETSTHREAD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(TARGETSTHREAD): % : %.o utils.o utils.h
-	$(CC) -pthread $(CFLAGS) $< -o $@
+	$(CC) -pthread $(CFLAGS) utils.o $< -o $@
 
 $(TARGETSNORMAL): % : %.o utils.o utils.h
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) utils.o $< -o $@
 
 .PRECIOUS: $(OBJECTS)
 
