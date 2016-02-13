@@ -1,7 +1,7 @@
 CC = g++
 
 CPPTHREAD = $(wildcard *thread*.cc)
-CPPNORMAL = $(filter-out thread, $(wildcard *.cc))
+CPPNORMAL = $(filter-out $(wildcard *thread*.cc), $(wildcard *.cc))
 CPPFILES = $(CPPNORMAL) $(CPPTHREAD)
 
 TARGETSTHREAD = $(patsubst %.cc,%,$(CPPTHREAD))
@@ -12,11 +12,12 @@ TARGETS = $(TARGETSNORMAL) $(TARGETSTHREAD)
 
 all: $(TARGETSTHREAD) $(TARGETSNORMAL)
 
-$(TARGETSNORMAL): $(CPPNORMAL)
-	$(CC) -Wall -O0 -std=c++11 -o $@ $<
-
 $(TARGETSTHREAD): $(CPPTHREAD)
-	$(CC) -pthread -Wall -O0 -std=c++11 -o $@ $<
+	$(CC) -pthread -Wall -O0 -std=c++11 -o $@ $@.cc
+
+$(TARGETSNORMAL): $(CPPNORMAL)
+	$(CC) -Wall -O0 -std=c++11 -o $@ $@.cc
+
 .PHONY: clean
 
 clean:
