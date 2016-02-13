@@ -5,6 +5,12 @@
 * Install gcc 4.7, resolve depedency issues
 * Install corresponding linux header
 
+```sh
+# for kernel 4.1.17+
+wget https://www.niksula.hut.fi/~mhiienka/Rpi/linux-headers-rpi/linux-headers-4.1.17%2B_4.1.17%2B-2_armhf.deb
+sudo dpkg -i linux-headers-4.1.17+_4.1.17+-2_armhf.deb
+```
+
 ## Kernel module
 ```sh
 # to list current kernel module
