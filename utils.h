@@ -19,7 +19,8 @@
 #define NUM_UNROLL 10
 
 // start and end time
-unsigned long start_time;
-unsigned long end_time;
+unsigned long time_start;
+unsigned long time_end;
+unsigned long time_total = 0;
 
 #endif

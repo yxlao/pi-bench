@@ -10,7 +10,6 @@ int main() {
     RESET_CCNT;
     unsigned start;
     unsigned end;
-    unsigned total = 0;
 
     // pipes
     int fd[2];
@@ -33,8 +32,8 @@ int main() {
             write(fd[1], (void*)&end, sizeof(unsigned));
             exit(1);
         }
-        total += end - start;
+        time_total += end - start;
     }
-    cout << 1. * total / NUM_ITER << endl;
+    cout << 1. * time_total / NUM_ITER << endl;
     return 0;
 }

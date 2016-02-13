@@ -5,30 +5,28 @@
 #include <pthread.h>
 #include <unistd.h>
 using namespace std;
+
+
 int fd[2];
 unsigned long start;
 void * RunThread(void * ) {
-  GET_CCNT(end_time);
- // write(fd[1], (void*)&start, sizeof(unsigned long));
-  pthread_exit(NULL);
+    GET_CCNT(time_end);
+    pthread_exit(NULL);
 }
 
 int main() {
     RESET_CCNT;
     pthread_t tid;
-    unsigned long total = 0;
-    // unsigned long total1 = 0;
+    // unsigned long time_total1 = 0;
     for (int i = 0; i < NUM_ITER; ++i) {
-       // pipe(fd);
+        // pipe(fd);
         pthread_create(&tid, NULL, RunThread, NULL);
-       // read(fd[0], &start_time, 1);
-        GET_CCNT(start_time);
+        // read(fd[0], &time_start, 1);
+        GET_CCNT(time_start);
         pthread_join(tid, NULL);
-       // GET_CCNT(end_time);
-        total += end_time - start_time;
-       // total1 += end_time - start;
-        // cout << start << "," << end << "," << end - start << endl;
+        // GET_CCNT(time_end);
+        time_total += time_end - time_start;
     }
-    cout << 1. * total / NUM_ITER <<" " << 1. * total / NUM_ITER << endl;
+    cout << 1. * time_total / NUM_ITER << " " << 1. * time_total / NUM_ITER << endl;
     return 0;
 }

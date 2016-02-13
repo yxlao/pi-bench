@@ -8,10 +8,6 @@ using namespace std;
 
 int main() {
     RESET_CCNT;
-    unsigned start;
-    unsigned end;
-    unsigned total = 0;
-
     // pipes
     int fd[2];
     pipe(fd);
@@ -25,16 +21,16 @@ int main() {
 
         // parent
         if (cpid != 0) {
-            GET_CCNT(start);
+            GET_CCNT(time_start);
             wait(NULL);
-            read(fd[0], (void*)&end, sizeof(unsigned));
+            read(fd[0], (void*)&time_end, sizeof(unsigned));
         } else {
-            GET_CCNT(end);
-            write(fd[1], (void*)&end, sizeof(unsigned));
+            GET_CCNT(time_end);
+            write(fd[1], (void*)&time_end, sizeof(unsigned));
             exit(1);
         }
-        total += end - start;
+        time_total += time_end - time_start;
     }
-    cout << 1. * total / NUM_ITER << endl;
+    cout << 1. * time_total / NUM_ITER << endl;
     return 0;
 }
