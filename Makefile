@@ -1,24 +1,34 @@
 CC = g++
+CFLAGS = -Wall -O0 -std=c++11
 
+# headers
+HEADERS = $(wildcard *.h)
+
+# objects
+OBJECTS = $(patsubst %.cc, %.o, $(wildcard *.cc))
+
+# targets
 CPPTHREAD = $(wildcard *thread*.cc)
-CPPNORMAL = $(filter-out $(wildcard *thread*.cc), $(wildcard *.cc))
+CPPNORMAL = $(filter-out $(wildcard *thread*.cc) utils.cc, $(wildcard *.cc))
 CPPFILES = $(CPPNORMAL) $(CPPTHREAD)
-
 TARGETSTHREAD = $(patsubst %.cc,%,$(CPPTHREAD))
 TARGETSNORMAL = $(patsubst %.cc,%,$(CPPNORMAL))
 TARGETS = $(TARGETSNORMAL) $(TARGETSTHREAD)
 
-.PRECIOUS: $(OFILES)
+all: $(TARGETSNORMAL) $(TARGETSTHREAD)
 
-all: $(TARGETSTHREAD) $(TARGETSNORMAL)
+%.o: %.cc $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TARGETSTHREAD): $(CPPTHREAD)
-	$(CC) -pthread -Wall -O0 -std=c++11 -o $@ $@.cc
+$(TARGETSTHREAD): % : %.o utils.o utils.h
+	$(CC) -pthread $(CFLAGS) utils.o $< -o $@
 
-$(TARGETSNORMAL): $(CPPNORMAL)
-	$(CC) -Wall -O0 -std=c++11 -o $@ $@.cc
+$(TARGETSNORMAL): % : %.o utils.o utils.h
+	$(CC) $(CFLAGS) utils.o $< -o $@
 
-.PHONY: clean
+.PRECIOUS: $(OBJECTS)
+
+.PHONY: clean all
 
 clean:
-	rm -rf $(OFILES) $(TARGETS)
+	rm -rf $(OBJECTS) $(TARGETS)
