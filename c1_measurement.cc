@@ -3,13 +3,14 @@
 using namespace std;
 
 int main() {
-    // ccnt_clr();
     RESET_CCNT;
-    for (int i = 0; i < 1000000; ++i) {
+    for (int i = 0; i < NUM_TRIAL; ++i) {
         GET_CCNT(time_start);
+        for (int j = 0; j < NUM_ITER; ++j) {
+        }
         GET_CCNT(time_end);
-        time_total += time_end - time_start;
+        time_trials[i] = time_end - time_start;
     }
-    cout << 1. * time_total / 1000000 << endl;
+    print_stats(time_trials, NUM_TRIAL);
     return 0;
 }
