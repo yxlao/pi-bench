@@ -11,7 +11,7 @@ void * RunThread(void * ) {
 }
 
 int main() {
-    RESET;
+    RESET_CCNT;
     pthread_t tid;
     unsigned long total = 0;
     for (int i = 0; i < STD_ITER; ++i) {

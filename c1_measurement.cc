@@ -4,7 +4,7 @@ using namespace std;
 
 int main() {
     // ccnt_clr();
-    RESET;
+    RESET_CCNT;
     unsigned start;
     unsigned end;
     unsigned total = 0;

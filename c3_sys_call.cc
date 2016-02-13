@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-    RESET;
+    RESET_CCNT;
     unsigned start;
     unsigned end;
     unsigned total = 0;

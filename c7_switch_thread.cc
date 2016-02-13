@@ -14,7 +14,7 @@ void * RunThread(void * ) {
 }
 
 int main() {
-    RESET;
+    RESET_CCNT;
     pthread_t tid;
     unsigned long total = 0;
     // unsigned long total1 = 0;
