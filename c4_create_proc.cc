@@ -7,10 +7,9 @@
 using namespace std;
 
 int main() {
-    RESET;
+    RESET_CCNT;
     unsigned start;
     unsigned end;
-    unsigned total = 0;
 
     // pipes
     int fd[2];
@@ -19,7 +18,7 @@ int main() {
     // pid_t
     pid_t cpid;
 
-    for (int i = 0; i < STD_ITER; ++i) {
+    for (int i = 0; i < NUM_ITER; ++i) {
         // get start
         GET_CCNT(start);
         // fork
@@ -33,8 +32,8 @@ int main() {
             write(fd[1], (void*)&end, sizeof(unsigned));
             exit(1);
         }
-        total += end - start;
+        time_total += end - start;
     }
-    cout << 1. * total / STD_ITER << endl;
+    cout << 1. * time_total / NUM_ITER << endl;
     return 0;
 }
