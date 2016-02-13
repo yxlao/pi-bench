@@ -15,13 +15,16 @@ TARGETSTHREAD = $(patsubst %.cc,%,$(CPPTHREAD))
 TARGETSNORMAL = $(patsubst %.cc,%,$(CPPNORMAL))
 TARGETS = $(TARGETSNORMAL) $(TARGETSTHREAD)
 
-all: $(TARGETS)
+all: $(TARGETSNORMAL) $(TARGETSTHREAD)
 
 %.o: %.cc $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TARGETS): $(OBJECTS)
-	echo "hello"
+$(TARGETSTHREAD): % : %.o utils.o utils.h
+	$(CC) -pthread $(CFLAGS) $< -o $@
+
+$(TARGETSNORMAL): % : %.o utils.o utils.h
+	$(CC) $(CFLAGS) $< -o $@
 
 .PRECIOUS: $(OBJECTS)
 
