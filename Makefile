@@ -9,26 +9,26 @@ TARGETS = $(patsubst %.cc,%,$(CPPFILES))
 
 all: a b c d e f g
 
-a: create_process.cc cycles.h
-	$(CC) -Wall -O0 -std=c++11 -o create_process create_process.cc
+a: c4_create_proc.cc utils.h
+	$(CC) -Wall -O0 -std=c++11 -o c4_create_proc c4_create_proc.cc
 
-b: switch_process.cc cycles.h
-	$(CC) -Wall -O0 -std=c++11 -o switch_process switch_process.cc
+b: c6_switch_proc.cc utils.h
+	$(CC) -Wall -O0 -std=c++11 -o c6_switch_proc c6_switch_proc.cc
 
-c: test_proc.cc cycles.h
-	$(CC) -Wall -O0 -std=c++11 -o test_proc test_proc.cc
+c: c2_proc_call.cc utils.h
+	$(CC) -Wall -O0 -std=c++11 -o c2_proc_call c2_proc_call.cc
 
-d: measurement.cc cycles.h
-	$(CC) -Wall -O0 -std=c++11 -o measurement measurement.cc
+d: c1_measurement.cc utils.h
+	$(CC) -Wall -O0 -std=c++11 -o c1_measurement c1_measurement.cc
 
-e: sys_call.cc cycles.h
-	$(CC) -Wall -O0 -std=c++11 -o sys_call sys_call.cc
+e: c3_sys_call.cc utils.h
+	$(CC) -Wall -O0 -std=c++11 -o c3_sys_call c3_sys_call.cc
 
-f: test_thread_create.cc cycles.h
-	$(CC) -pthread -Wall -O0 -std=c++11 -o test_thread_create test_thread_create.cc
+f: c5_create_thread.cc utils.h
+	$(CC) -pthread -Wall -O0 -std=c++11 -o c5_create_thread c5_create_thread.cc
 
-g: test_thread_switch.cc cycles.h
-	$(CC) -pthread -Wall -O0 -std=c++11 -o test_thread_switch test_thread_switch.cc
+g: c7_switch_thread.cc utils.h
+	$(CC) -pthread -Wall -O0 -std=c++11 -o c7_switch_thread c7_switch_thread.cc
 
 .PHONY: clean
 

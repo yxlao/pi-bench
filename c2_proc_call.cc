@@ -1,6 +1,6 @@
 #include <iostream>
 // #include "raspbian-ccr/cycles.c"
-#include "cycles.h"
+#include "utils.h"
 // #include <cstdint>
 using namespace std;
 void fun0() {
@@ -46,7 +46,7 @@ int main() {
         //cout << start - start << "," << end << "," << end - start << endl;
     }
     cout << "procedure call 0: " << 1. * total / STD_ITER << endl;
-    
+
     RESET;
     total = 0;
     for (int i = 0; i < STD_ITER; ++i) {
@@ -55,7 +55,7 @@ int main() {
         total += end_time - start_time;
     }
     cout << "procedure call 1: " << 1. * total / STD_ITER << endl;
-    
+
     RESET;
     total = 0;
     for (int i = 0; i < STD_ITER; ++i) {
@@ -64,7 +64,7 @@ int main() {
         total += end_time - start_time;
     }
     cout << "procedure call 2: " << 1. * total / STD_ITER << endl;
-    
+
     RESET;
     total = 0;
     for (int i = 0; i < STD_ITER; ++i) {
@@ -73,7 +73,7 @@ int main() {
         total += end_time - start_time;
     }
     cout << "procedure call 3: " << 1. * total / STD_ITER << endl;
-    
+
     RESET;
     total = 0;
     for (int i = 0; i < STD_ITER; ++i) {
@@ -82,7 +82,7 @@ int main() {
         total += end_time - start_time;
     }
     cout << "procedure call 4: " << 1. * total / STD_ITER << endl;
-    
+
     RESET;
     total = 0;
     for (int i = 0; i < STD_ITER; ++i) {
@@ -91,7 +91,7 @@ int main() {
         total += end_time - start_time;
     }
     cout << "procedure call 5: " << 1. * total / STD_ITER << endl;
-    
+
     RESET;
     total = 0;
     for (int i = 0; i < STD_ITER; ++i) {
@@ -100,7 +100,7 @@ int main() {
         total += end_time - start_time;
     }
     cout << "procedure call 6: " << 1. * total / STD_ITER << endl;
-    
+
     RESET;
     total = 0;
     for (int i = 0; i < STD_ITER; ++i) {
@@ -109,6 +109,6 @@ int main() {
         total += end_time - start_time;
     }
     cout << "procedure call 7: " << 1. * total / STD_ITER << endl;
-    
+
     return 0;
 }

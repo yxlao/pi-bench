@@ -1,7 +1,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <sys/syscall.h>
-#include "cycles.h"
+#include "utils.h"
 using namespace std;
 
 int main() {
