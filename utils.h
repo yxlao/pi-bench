@@ -16,7 +16,10 @@
 // experiment repetitions
 #define NUM_TRIAL  1000
 #define NUM_ITER   100
-#define NUM_UNROLL 10
+#define NUM_UNROLL
+
+// store time of each trail
+unsigned long time_trials[NUM_TRIAL];
 
 // start and end time
 unsigned long time_start;
