@@ -3,7 +3,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "utils.h"
-using namespace std;
 
 int main() {
     RESET_CCNT;
