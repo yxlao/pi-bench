@@ -17,7 +17,7 @@
     asm volatile("FMSTAT")
 
 // experiment repetitions
-#define NUM_TRIAL  1000
+#define NUM_TRIAL  10000
 #define NUM_ITER   200
 #define NUM_UNROLL 5
 
@@ -43,5 +43,7 @@ void print_stats(unsigned long* data, int num_trial, int num_iter,
                  int num_unroll);
 void print_all_stats(unsigned long* data, int num_trial, int num_iter,
                      int num_unroll);
+void print_trimmed_mean_std(unsigned long* data, int num_trial, int num_iter,
+                            int num_unroll);
 
 #endif
