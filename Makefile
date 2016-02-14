@@ -15,7 +15,8 @@ TARGETS_THREAD = $(patsubst %.cc,%,$(CPP_THREAD))
 TARGETS_NORMAL = $(patsubst %.cc,%,$(CPP_NORMAL))
 TARGETS = $(TARGETS_NORMAL) $(TARGETS_THREAD)
 
-all: $(TARGETS_NORMAL) $(TARGETS_THREAD)
+default: $(TARGETS_NORMAL) $(TARGETS_THREAD)
+all: default
 
 %.o: %.cc $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
