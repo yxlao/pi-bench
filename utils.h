@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <math.h>
+#include <iostream>
 
 // reset counter
 #define RESET_CCNT\

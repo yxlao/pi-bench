@@ -1,40 +1,15 @@
-#include <iostream>
-// #include "raspbian-ccr/cycles.c"
 #include "utils.h"
-// #include <cstdint>
+
 using namespace std;
-void fun0() {
-    GET_CCNT(time_end);
-}
 
-void fun1(int arg) {
-    GET_CCNT(time_end);
-}
-
-void fun2(int arg1, int arg2) {
-    GET_CCNT(time_end);
-}
-
-void fun3(int arg1, int arg2, int arg3) {
-    GET_CCNT(time_end);
-}
-
-void fun4(int arg1, int arg2, int arg3, int arg4) {
-    GET_CCNT(time_end);
-}
-
-void fun5(int arg1, int arg2, int arg3, int arg4, int arg5) {
-    GET_CCNT(time_end);
-}
-
-void fun6(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
-    GET_CCNT(time_end);
-}
-
-void fun7(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6,
-          int arg7) {
-    GET_CCNT(time_end);
-}
+void fun0() {}
+void fun1(int arg1) {}
+void fun2(int arg1, int arg2) {}
+void fun3(int arg1, int arg2, int arg3) {}
+void fun4(int arg1, int arg2, int arg3, int arg4) {}
+void fun5(int arg1, int arg2, int arg3, int arg4, int arg5) {}
+void fun6(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {}
+void fun7(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {}
 
 int main() {
     RESET_CCNT;

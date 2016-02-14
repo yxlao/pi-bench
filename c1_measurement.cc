@@ -1,6 +1,4 @@
-#include <iostream>
 #include "utils.h"
-using namespace std;
 
 /*
 We define two types of measurement overhead:
@@ -19,7 +17,7 @@ int main() {
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
     }
-    cout << "## Overhead per measurement:" << endl;
+    std::cout << "## Overhead per measurement:" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, 1, 1);
 
     // overhead per operation
@@ -36,7 +34,7 @@ int main() {
                                           (float)NUM_ITER /
                                           (float)NUM_UNROLL);
     }
-    cout << "Overhead per operation:" << endl;
+    std::cout << "Overhead per operation:" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, 1, 1);
     return 0;
 }

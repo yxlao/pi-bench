@@ -1,11 +1,7 @@
-#include <iostream>
-// #include "raspbian-ccr/cycles.c"
 #include "utils.h"
-// #include <cstdint>
 #include <pthread.h>
 #include <unistd.h>
 using namespace std;
-
 
 int fd[2];
 unsigned long start;

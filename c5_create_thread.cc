@@ -1,7 +1,4 @@
-#include <iostream>
-// #include "raspbian-ccr/cycles.c"
 #include "utils.h"
-// #include <cstdint>
 #include <pthread.h>
 using namespace std;
 
