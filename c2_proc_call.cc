@@ -1,7 +1,5 @@
 #include "utils.h"
 
-using namespace std;
-
 void fun0() {}
 void fun1(int arg1) {}
 void fun2(int arg1, int arg2) {}
