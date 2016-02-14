@@ -68,10 +68,11 @@ float get_max(unsigned long* data, int num_trial) {
 int trim_outlier(unsigned long* data, int num_trial) {
     float mean = get_mean(data, num_trial);
     float sd = get_sd(data, num_trial);
-    unsigned long max_bound = (unsigned long) mean + 3 * (unsigned long) sd;
+    float max_bound = mean + 3 * sd;
+    max_bound = min(max_bound, mean * 2);
     int write_idx = 0;
     for (int i = 0; i < num_trial; i++) {
-        if (data[i] <= max_bound) {
+        if ((float) data[i] <= max_bound) {
             data[write_idx] = data[i];
             write_idx++;
         }
