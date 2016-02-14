@@ -5,46 +5,26 @@
 using namespace std;
 
 int main() {
-  int i, j, k, size = 1, read, ind;
+  int size = 1, temp, ind;
   time_t t;
-  unsigned long start, end;
   srand((unsigned)time(&t));
-  for (i = 0; i < 26; i++) {
-    int * data = new int[size];
-    //initial data
-    for (j = 0; j < NUM_TRIAL; j++) {
-      unsigned long time_total = 0;
-      RESET_CCNT;
-      for (k = 0; k < NUM_ITER * NUM_UNROLL; k++) {
-        ind = rand() % size;
-        GET_CCNT(start);
-        //RESET_CCNT;
-        read = data[ind];
-        GET_CCNT(end);
-        time_total += end - start;
-      }
+  int* data = new int[67108864];
 
-      if (j == 10) {
-        cout << "memory read time of size " << size << " is: "
-             << 1. * time_total << " average:  " << 1. * time_total / NUM_ITER / NUM_UNROLL
-             << endl;
-      }
-
-      //unsigned long counter = 0;
-      // for (int m = 0; m < size; m += 32) {
-      //   counter ++;
-      //  RESET_CCNT;
-      //      read = data[m];
-      //    GET_CCNT(end);
-      //     data[m] = read;
-      //  time_total += end;
-      // }
-      // if (j == 10) {
-      //   cout << "memory read time of size " << size << " is: " << 1. * time_total << " average: " <<
-      //    1. * time_total / counter << endl;
-      // }
+  for (int s = 0; s < 27; s++) {
+    RESET_CCNT;
+    for (int i = 0; i < NUM_TRIAL; i++) {
+      ind = rand() % size;
+      GET_CCNT(time_start);
+      temp = data[ind];
+      GET_CCNT(time_end);
+      time_trials[i] = time_end - time_start;
     }
+    cout << size << endl;
+    print_trimmed_mean_std(time_trials, NUM_TRIAL, 1, 1);
     size = size * 2;
   }
+
+  delete data;
+  (void) temp;
   return 0;
 }
