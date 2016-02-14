@@ -27,6 +27,9 @@ $(TARGETS_THREAD): % : %.o utils.o utils.h
 $(TARGETS_NORMAL): % : %.o utils.o utils.h
 	$(CC) $(CFLAGS) utils.o $< -o $@
 
+module:
+	sudo insmod raspbian-ccr/enable-ccr.ko
+
 .PRECIOUS: $(OBJECTS)
 
 .PHONY: clean all
