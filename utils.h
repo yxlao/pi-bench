@@ -50,6 +50,32 @@ template <class T> float get_sd(T* data, int num_trial) {
     return sqrt(sum_deviation / num_trial);
 }
 
+template <class T> float get_min(T* data, int num_trial) {
+    float min_val = 0;
+    if (num_trial > 0) {
+        min_val = float(data[0]);
+    }
+    for (int i = 0; i < num_trial; ++i) {
+        if (float(data[i]) < min_val) {
+            min_val = data[i];
+        }
+    }
+    return min_val;
+}
+
+template <class T> float get_max(T* data, int num_trial) {
+    float max_val = 0;
+    if (max_val > 0) {
+        max_val = float(data[0]);
+    }
+    for (int i = 0; i < num_trial; ++i) {
+        if (float(data[i]) > max_val) {
+            max_val = data[i];
+        }
+    }
+    return max_val;
+}
+
 // returns the trimmed num_trial
 template <class T> int trim_outlier(T* data, int num_trial) {
     float mean = get_mean(data, num_trial);
@@ -69,12 +95,16 @@ template <class T> void print_stats(T* data, int num_trial, int num_iter,
                                     int num_unroll) {
     float mean = get_mean(data, num_trial);
     float sd = get_sd(data, num_trial);
+    float min_val = get_min(data, num_trial);
+    float max_val = get_max(data, num_trial);
     float mean_op = mean / float(num_iter) / float(num_unroll);
     std::cout << "num_trial: " << num_trial << std::endl
-              << "nnum_iter: " << num_iter << std::endl
+              << "num_iter: " << num_iter << std::endl
               << "mean_op: " << mean_op << std::endl
               << "mean_trial: " << mean << std::endl
-              << "std_trail: " << sd << std::endl;
+              << "std_trail: " << sd << std::endl
+              << "min_trial: " << min_val << std::endl
+              << "max_trial: " << max_val << std::endl;
 }
 
 template <class T> void print_all_stats(T* data, int num_trial, int num_iter,
