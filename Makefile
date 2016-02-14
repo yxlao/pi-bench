@@ -35,4 +35,4 @@ module:
 .PHONY: clean all
 
 clean:
-	rm -rf $(OBJECTS) $(TARGETS)
+	rm -rf $(OBJECTS) $(TARGETS) *.o
