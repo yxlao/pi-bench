@@ -12,77 +12,135 @@ void fun6(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {}
 void fun7(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) {}
 
 int main() {
-    RESET_CCNT;
-
-    for (int i = 0; i < NUM_TRIAL; ++i) {
-        GET_CCNT(time_start);
-        fun0();
-        time_total += time_end - time_start;
-    }
-    cout << "procedure call 0: " << 1. * time_total / NUM_TRIAL << endl;
 
     RESET_CCNT;
-    time_total = 0;
     for (int i = 0; i < NUM_TRIAL; ++i) {
         GET_CCNT(time_start);
-        fun1(0);
-        time_total += time_end - time_start;
+        for (int j = 0; j < NUM_ITER; ++j) {
+            fun0();
+            fun0();
+            fun0();
+            fun0();
+            fun0();
+        }
+        GET_CCNT(time_end);
+        time_trials[i] = time_end - time_start;
     }
-    cout << "procedure call 1: " << 1. * time_total / NUM_TRIAL << endl;
+    std::cout << "## Procedure call fun0" << std::endl;
+    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
-    time_total = 0;
     for (int i = 0; i < NUM_TRIAL; ++i) {
         GET_CCNT(time_start);
-        fun2(0, 0);
-        time_total += time_end - time_start;
+        for (int j = 0; j < NUM_ITER; ++j) {
+            fun1(0);
+            fun1(0);
+            fun1(0);
+            fun1(0);
+            fun1(0);
+        }
+        GET_CCNT(time_end);
+        time_trials[i] = time_end - time_start;
     }
-    cout << "procedure call 2: " << 1. * time_total / NUM_TRIAL << endl;
+    std::cout << "## Procedure call fun1" << std::endl;
+    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+
 
     RESET_CCNT;
-    time_total = 0;
     for (int i = 0; i < NUM_TRIAL; ++i) {
         GET_CCNT(time_start);
-        fun3(0, 0, 0);
-        time_total += time_end - time_start;
+        for (int j = 0; j < NUM_ITER; ++j) {
+            fun2(0, 0);
+            fun2(0, 0);
+            fun2(0, 0);
+            fun2(0, 0);
+            fun2(0, 0);
+        }
+        GET_CCNT(time_end);
+        time_trials[i] = time_end - time_start;
     }
-    cout << "procedure call 3: " << 1. * time_total / NUM_TRIAL << endl;
+    std::cout << "## Procedure call fun2" << std::endl;
+    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
-    time_total = 0;
     for (int i = 0; i < NUM_TRIAL; ++i) {
         GET_CCNT(time_start);
-        fun4(0, 0, 0, 0);
-        time_total += time_end - time_start;
+        for (int j = 0; j < NUM_ITER; ++j) {
+            fun3(0, 0, 0);
+            fun3(0, 0, 0);
+            fun3(0, 0, 0);
+            fun3(0, 0, 0);
+            fun3(0, 0, 0);
+        }
+        GET_CCNT(time_end);
+        time_trials[i] = time_end - time_start;
     }
-    cout << "procedure call 4: " << 1. * time_total / NUM_TRIAL << endl;
+    std::cout << "## Procedure call fun3" << std::endl;
+    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
-    time_total = 0;
     for (int i = 0; i < NUM_TRIAL; ++i) {
         GET_CCNT(time_start);
-        fun5(0, 0, 0, 0, 0);
-        time_total += time_end - time_start;
+        for (int j = 0; j < NUM_ITER; ++j) {
+            fun4(0, 0, 0, 0);
+            fun4(0, 0, 0, 0);
+            fun4(0, 0, 0, 0);
+            fun4(0, 0, 0, 0);
+            fun4(0, 0, 0, 0);
+        }
+        GET_CCNT(time_end);
+        time_trials[i] = time_end - time_start;
     }
-    cout << "procedure call 5: " << 1. * time_total / NUM_TRIAL << endl;
+    std::cout << "## Procedure call fun4" << std::endl;
+    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
-    time_total = 0;
     for (int i = 0; i < NUM_TRIAL; ++i) {
         GET_CCNT(time_start);
-        fun6(0, 0, 0, 0, 0, 0);
-        time_total += time_end - time_start;
+        for (int j = 0; j < NUM_ITER; ++j) {
+            fun5(0, 0, 0, 0, 0);
+            fun5(0, 0, 0, 0, 0);
+            fun5(0, 0, 0, 0, 0);
+            fun5(0, 0, 0, 0, 0);
+            fun5(0, 0, 0, 0, 0);
+        }
+        GET_CCNT(time_end);
+        time_trials[i] = time_end - time_start;
     }
-    cout << "procedure call 6: " << 1. * time_total / NUM_TRIAL << endl;
+    std::cout << "## Procedure call fun5" << std::endl;
+    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
-    time_total = 0;
     for (int i = 0; i < NUM_TRIAL; ++i) {
         GET_CCNT(time_start);
-        fun7(0, 0, 0, 0, 0, 0, 0);
-        time_total += time_end - time_start;
+        for (int j = 0; j < NUM_ITER; ++j) {
+            fun6(0, 0, 0, 0, 0, 0);
+            fun6(0, 0, 0, 0, 0, 0);
+            fun6(0, 0, 0, 0, 0, 0);
+            fun6(0, 0, 0, 0, 0, 0);
+            fun6(0, 0, 0, 0, 0, 0);
+        }
+        GET_CCNT(time_end);
+        time_trials[i] = time_end - time_start;
     }
-    cout << "procedure call 7: " << 1. * time_total / NUM_TRIAL << endl;
+    std::cout << "## Procedure call fun6" << std::endl;
+    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+
+    RESET_CCNT;
+    for (int i = 0; i < NUM_TRIAL; ++i) {
+        GET_CCNT(time_start);
+        for (int j = 0; j < NUM_ITER; ++j) {
+            fun7(0, 0, 0, 0, 0, 0, 0);
+            fun7(0, 0, 0, 0, 0, 0, 0);
+            fun7(0, 0, 0, 0, 0, 0, 0);
+            fun7(0, 0, 0, 0, 0, 0, 0);
+            fun7(0, 0, 0, 0, 0, 0, 0);
+        }
+        GET_CCNT(time_end);
+        time_trials[i] = time_end - time_start;
+    }
+    std::cout << "## Procedure call fun7" << std::endl;
+    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     return 0;
 }
