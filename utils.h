@@ -113,7 +113,6 @@ template <class T> void print_all_stats(T* data, int num_trial, int num_iter,
     print_stats(data, num_trial, num_iter, num_unroll);
 
     int trimmed_num_trail = trim_outlier(data, num_trial);
-    std::cout << trimmed_num_trail << " " << num_trial << std::endl;
     std::cout << "# trimmed stats" << std::endl;
     print_stats(data, trimmed_num_trail, num_iter, num_unroll);
 }
