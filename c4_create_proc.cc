@@ -7,8 +7,6 @@ using namespace std;
 
 int main() {
     RESET_CCNT;
-    unsigned start;
-    unsigned end;
 
     // pipes
     int fd[2];
@@ -17,22 +15,24 @@ int main() {
     // pid_t
     pid_t cpid;
 
-    for (int i = 0; i < NUM_ITER; ++i) {
+    for (int i = 0; i < NUM_TRIAL; ++i) {
         // get start
-        GET_CCNT(start);
+        GET_CCNT(time_start);
         // fork
         cpid = fork();
         // parent
         if (cpid != 0) {
             wait(NULL);
-            read(fd[0], (void*)&end, sizeof(unsigned));
+            read(fd[0], (void*)&time_end, sizeof(unsigned long));
         } else {
-            GET_CCNT(end);
-            write(fd[1], (void*)&end, sizeof(unsigned));
+            GET_CCNT(time_end);
+            write(fd[1], (void*)&time_end, sizeof(unsigned long));
             exit(1);
         }
-        time_total += end - start;
+        time_trials[i] = time_end - time_start;
     }
-    cout << 1. * time_total / NUM_ITER << endl;
+
+    print_all_stats(time_trials, NUM_TRIAL, 1, 1);
+
     return 0;
 }
