@@ -1,23 +1,40 @@
 #include "utils.h"
 #include <pthread.h>
 using namespace std;
+#define NUM_TRIAL NUM_ITER
 
 void * RunThread(void * ) {
-    GET_CCNT(time_end);
     pthread_exit(NULL);
 }
 
 int main() {
-    RESET_CCNT;
     pthread_t tid;
 
-    for (int i = 0; i < NUM_ITER; ++i) {
+    for (int i = 0; i < NUM_TRIAL; ++i) {
+        RESET_CCNT;
         GET_CCNT(time_start);
-        pthread_create(&tid, NULL, RunThread, NULL);
-        pthread_join(tid, NULL);
-        time_total += time_end - time_start;
-        // cout << start << "," << end << "," << end - start << endl;
+        for (int j = 0; j < NUM_ITER; ++j) {
+            pthread_create(&tid, NULL, RunThread, NULL);
+            pthread_join(tid, NULL);
+            pthread_create(&tid, NULL, RunThread, NULL);
+            pthread_join(tid, NULL);
+            pthread_create(&tid, NULL, RunThread, NULL);
+            pthread_join(tid, NULL);
+            pthread_create(&tid, NULL, RunThread, NULL);
+            pthread_join(tid, NULL);
+            pthread_create(&tid, NULL, RunThread, NULL);
+            pthread_join(tid, NULL);
+        }
+        GET_CCNT(time_end);
+        if (time_end > time_start) {
+            time_trials[i] = time_end - time_start;
+        } else {
+            std::cout << "eliminated " << i << std::endl;
+            --i;
+        }
     }
-    cout << 1. * time_total / NUM_ITER << endl;
+    std::cout << "## Thread creation " << std::endl;
+    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+
     return 0;
 }
