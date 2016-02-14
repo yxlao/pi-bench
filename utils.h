@@ -16,9 +16,9 @@
     asm volatile("FMSTAT");
 
 // experiment repetitions
-#define NUM_TRIAL  1000
-#define NUM_ITER   100
-#define NUM_UNROLL 10
+#define NUM_TRIAL  10000
+#define NUM_ITER   200
+#define NUM_UNROLL 5
 
 // store time of each trail
 extern unsigned long time_trials[NUM_TRIAL];
@@ -29,35 +29,63 @@ extern unsigned long time_end;
 extern unsigned long time_total;
 
 // util template functions
-template <class T> float get_mean(T* data, int n) {
+template <class T> float get_mean(T* data, int num_trial) {
     // mean
     float mean = 0.0;
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < num_trial; ++i) {
         mean += float(data[i]);
     }
-    mean = mean / n;
+    mean = mean / num_trial;
     return mean;
 }
 
-template <class T> float get_sd(T* data, int n) {
+template <class T> float get_sd(T* data, int num_trial) {
     // mean
-    float mean = get_mean(data, n);
+    float mean = get_mean(data, num_trial);
     // std
     float sum_deviation = 0.0;
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < num_trial; ++i) {
         sum_deviation += (float(data[i]) - mean) * (float(data[i]) - mean);
     }
-    return sqrt(sum_deviation / n);
+    return sqrt(sum_deviation / num_trial);
 }
 
-template <class T> void print_stats(T* data, int n) {
-    float mean = get_mean(data, n);
-    float sd = get_sd(data, n);
-    std::cout << "num_trial: " << NUM_TRIAL << std::endl
-              << "nnum_iter: " << NUM_ITER << std::endl
-              << "mean_op: " << mean / float(NUM_ITER) << std::endl
+// returns the trimmed num_trial
+template <class T> int trim_outlier(T* data, int num_trial) {
+    float mean = get_mean(data, num_trial);
+    float sd = get_sd(data, num_trial);
+    T max_bound = T(mean) + 3 * T(sd);
+    int write_idx = 0;
+    for (int i = 0; i < num_trial; i++) {
+        if (data[i] <= max_bound) {
+            data[write_idx] = data[i];
+            write_idx++;
+        }
+    }
+    return write_idx;
+}
+
+template <class T> void print_stats(T* data, int num_trial, int num_iter,
+                                    int num_unroll) {
+    float mean = get_mean(data, num_trial);
+    float sd = get_sd(data, num_trial);
+    float mean_op = mean / float(num_iter) / float(num_unroll);
+    std::cout << "num_trial: " << num_trial << std::endl
+              << "nnum_iter: " << num_iter << std::endl
+              << "mean_op: " << mean_op << std::endl
               << "mean_trial: " << mean << std::endl
               << "std_trail: " << sd << std::endl;
+}
+
+template <class T> void print_all_stats(T* data, int num_trial, int num_iter,
+                                        int num_unroll) {
+    std::cout << "# original stats" << std::endl;
+    print_stats(data, num_trial, num_iter, num_unroll);
+
+    int trimmed_num_trail = trim_outlier(data, num_trial);
+    std::cout << trimmed_num_trail << " " << num_trial << std::endl;
+    std::cout << "# trimmed stats" << std::endl;
+    print_stats(data, trimmed_num_trail, num_iter, num_unroll);
 }
 
 #endif
