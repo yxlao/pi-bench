@@ -30,6 +30,10 @@ $(TARGETS_NORMAL): % : %.o utils.o utils.h
 module:
 	sudo insmod raspbian-ccr/enable-ccr.ko
 
+# display raspberry pi's temperature
+temp:
+	sudo /opt/vc/bin/vcgencmd measure_temp
+
 .PRECIOUS: $(OBJECTS)
 
 .PHONY: clean all
