@@ -13,7 +13,7 @@ int main() {
   for (int s = 0; s < 27; s++) {
     RESET_CCNT;
     for (int i = 0; i < NUM_TRIAL; i++) {
-      ind = rand() % size;
+      ind = (unsigned int)((float)rand() / (float)RAND_MAX * size);
       GET_CCNT(time_start);
       temp = data[ind];
       GET_CCNT(time_end);
