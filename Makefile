@@ -19,6 +19,7 @@ default: $(TARGETS_NORMAL) $(TARGETS_THREAD)
 all: default
 
 %.o: %.cc $(HEADERS)
+	@dos2unix -q $<
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(TARGETS_THREAD): % : %.o utils.o utils.h
