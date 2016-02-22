@@ -4,6 +4,12 @@
 #include "utils.h"
 using namespace std;
 
+// experiment repetitions
+#define NUM_TRIAL  10000
+#define NUM_ITER   200
+#define NUM_UNROLL 5
+unsigned long time_trials[NUM_TRIAL];
+
 int main() {
   int size = 1, ind, temp;
   time_t t;
@@ -25,7 +31,7 @@ int main() {
     print_trimmed_mean_std(time_trials, NUM_TRIAL, 1, 1);
     size = size * 2;
     delete data;
-  } 
+  }
 
  // delete data;
   //delete[] my_time_trials;

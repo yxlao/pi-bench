@@ -5,6 +5,12 @@
 #include <unistd.h> // for sync, write, and close
 #include <fstream> // for ofstream
 
+// experiment repetitions
+#define NUM_TRIAL  10000
+#define NUM_ITER   200
+#define NUM_UNROLL 5
+unsigned long time_trials[NUM_TRIAL];
+
 int main(int argc, char *argv[]){
     int fd = open("/home/pi/page_file.img", O_RDONLY);
     struct stat s;

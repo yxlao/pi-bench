@@ -16,14 +16,6 @@
     asm volatile("mrc p15, 0, %0, c15, c12, 1" : "=r"(value));\
     asm volatile("FMSTAT")
 
-// experiment repetitions
-#define NUM_TRIAL  10000
-#define NUM_ITER   200
-#define NUM_UNROLL 5
-
-// store time of each trail
-extern unsigned long time_trials[NUM_TRIAL];
-
 // start and end time
 extern unsigned long time_start;
 extern unsigned long time_end;

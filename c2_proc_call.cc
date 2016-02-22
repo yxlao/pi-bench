@@ -1,5 +1,11 @@
 #include "utils.h"
 
+// experiment repetitions
+#define NUM_TRIAL  10000
+#define NUM_ITER   200
+#define NUM_UNROLL 5
+unsigned long time_trials[NUM_TRIAL];
+
 void fun0() {}
 void fun1(int arg1) {}
 void fun2(int arg1, int arg2) {}

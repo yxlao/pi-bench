@@ -3,6 +3,12 @@
 #include <unistd.h>
 using namespace std;
 
+// experiment repetitions
+#define NUM_TRIAL  10000
+#define NUM_ITER   200
+#define NUM_UNROLL 5
+unsigned long time_trials[NUM_TRIAL];
+
 int fd[2];
 unsigned long start;
 void * RunThread(void * ) {
