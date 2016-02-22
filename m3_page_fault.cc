@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include "utils.h"
 #include <unistd.h> // for sync, write, and close
-
+#include <fstream>
 
 int main(int argc, char *argv[]){
     // random number
@@ -25,8 +25,8 @@ int main(int argc, char *argv[]){
 
     unsigned addr;
     int temp;
-
-    for (int i = 0; i < 64; ++i) {
+    int i = 0;
+    for (i = 0; i < 1000; ++i) {
         addr = (unsigned) ((float)rand() / (float)RAND_MAX * (float) size);
 
         RESET_CCNT;
@@ -45,8 +45,17 @@ int main(int argc, char *argv[]){
         std::cout << time_trials[i] << std::endl;
     }
     close(fd);
+
+    std::ofstream ofs;
+
+    ofs.open ("m3_output.txt", std::ofstream::out | std::ofstream::app);
+    for (int k = 0; k < i; ++k) {
+    ofs << time_trials[k] << std::endl;
+    }
+    ofs.close();
+
     std::cout << "x = " << temp << std::endl;
     std::cout << "## Page fault " << std::endl;
-    print_all_stats(time_trials, 64, 1, 1);
+    print_all_stats(time_trials, i, 1, 1);
     return 0;
 }
