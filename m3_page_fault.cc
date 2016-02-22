@@ -16,7 +16,8 @@ int main(int argc, char *argv[]){
 
     int j = size - 1;
     int i;
-    std::cout << "address of data: " << (unsigned long) data << std::endl;
+    long page_size = sysconf(_SC_PAGESIZE);
+    std::cout << "page size: " << page_size << " address of data: " << (unsigned long) data << std::endl;
     for (i = 0; i < 1535 && j >= 0; ++i) {
         RESET_CCNT;
         GET_CCNT(time_start);
