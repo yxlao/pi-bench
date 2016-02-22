@@ -11,23 +11,17 @@ using namespace std;
 unsigned long time_trials[NUM_TRIAL];
 
 int main() {
-    int i, j = 0;
-    int * data = new int[1048576];//4MByte = 1M integers = 2 ^ 20 integers = 1048576 integers
-    //read test
+    int i, j;
+    char * data = new char[4194304];//4MByte = 4194304 Chars
+    for (int i = 0; i < 4194304; i++) {
+        data[i] = 'a' + i % ('z' - 'a');
+    }
+    //write test
     for (i = 0; i < NUM_TRIAL; i++) {
         RESET_CCNT;
         GET_CCNT(time_start);
-        for (j = 0; j < 1048504; j += 80) {
-            data[j] = 1;
-            data[j + 8] = 1;//next cache line
-            data[j + 16] = 1;
-            data[j + 24] = 1;
-            data[j + 32] = 1;
-            data[j + 40] = 1;
-            data[j + 48] = 1;
-            data[j + 56] = 1;
-            data[j + 64] = 1;
-            data[j + 72] = 1;
+        for (j = 0; j < 4194304; j++) {
+            data[j] = 'a';
         }
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
