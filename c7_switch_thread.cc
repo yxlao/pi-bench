@@ -1,7 +1,6 @@
 #include "utils.h"
 #include <pthread.h>
 #include <unistd.h>
-using namespace std;
 
 // experiment repetitions
 #define NUM_TRIAL  10000

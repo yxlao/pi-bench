@@ -2,7 +2,6 @@
 #include <time.h>
 #include <stdlib.h>
 #include "utils.h"
-using namespace std;
 
 // experiment repetitions
 #define NUM_TRIAL  10000
@@ -27,7 +26,7 @@ int main() {
       GET_CCNT(time_end);
       time_trials[i] = time_end - time_start;
     }
-    cout << s << ": " << size << endl;
+    std::cout << s << ": " << size << std::endl;
     print_trimmed_mean_std(time_trials, NUM_TRIAL, 1, 1);
     size = size * 2;
     delete data;
