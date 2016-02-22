@@ -111,10 +111,10 @@ void print_trimmed_mean_std(unsigned long* data, int num_trial, int num_iter,
 
 void print_all_stats(unsigned long* data, int num_trial, int num_iter,
                      int num_unroll) {
-    std::cout << "# original stats" << std::endl;
+    std::cout << "[original stats]" << std::endl;
     print_stats(data, num_trial, num_iter, num_unroll);
 
     int trimmed_num_trail = trim_outlier(data, num_trial);
-    std::cout << "# trimmed stats" << std::endl;
+    std::cout << "[trimmed stats]" << std::endl;
     print_stats(data, trimmed_num_trail, num_iter, num_unroll);
 }
