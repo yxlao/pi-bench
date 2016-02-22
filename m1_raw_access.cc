@@ -31,8 +31,8 @@ int main() {
     size = size * 2;
     delete data;
   }
-
- // delete data;
-  //delete[] my_time_trials;
+  (void) temp;
+  // delete data;
+  // delete[] my_time_trials;
   return 0;
 }

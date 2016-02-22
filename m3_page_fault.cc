@@ -32,7 +32,7 @@ int main(int argc, char *argv[]){
         j -= 1048576;
 
         int fd2;
-        char* data = "3";
+        char const* data = "3";
 
         sync();
         fd2 = open("/proc/sys/vm/drop_caches", O_WRONLY);
