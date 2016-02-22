@@ -88,6 +88,7 @@ void print_stats(unsigned long* data, int num_trial, int num_iter,
     float mean_op = mean / (float) num_iter / (float) num_unroll;
     std::cout << "num_trial: " << num_trial << std::endl
               << "num_iter: " << num_iter << std::endl
+              << "num_unroll: " << num_unroll << std::endl
               << "mean_op: " << mean_op << std::endl
               << "mean_trial: " << mean << std::endl
               << "std_trail: " << sd << std::endl

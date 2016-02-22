@@ -14,33 +14,28 @@ Type 2: overhead per operation
 (t_loop * NUM_ITER + t_readcycle) / (NUM_ITER * NUM_UNROLL)
 */
 int main() {
-    // overhead per measurement
+    // cycle register read overhead
     RESET_CCNT;
     for (int i = 0; i < NUM_TRIAL; ++i) {
         GET_CCNT(time_start);
-        for (int j = 0; j < NUM_ITER; ++j) {
-        }
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
     }
-    std::cout << "## Overhead per measurement:" << std::endl;
+    std::cout << "##### Register read overhead:" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, 1, 1);
 
-    // overhead per operation
+    // register read overhead + loop overhead
     RESET_CCNT;
     for (int i = 0; i < NUM_TRIAL; ++i) {
         GET_CCNT(time_start);
         for (int j = 0; j < NUM_ITER; ++j) {
+            // do operation NUM_UNROLL times
         }
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
     }
-    for (int i = 0; i < NUM_TRIAL; ++i) {
-        time_trials[i] = (unsigned long) ((float)time_trials[i] /
-                                          (float)NUM_ITER /
-                                          (float)NUM_UNROLL);
-    }
-    std::cout << "Overhead per operation:" << std::endl;
+    std::cout << "##### Loop + register read overhead:" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, 1, 1);
+
     return 0;
 }
