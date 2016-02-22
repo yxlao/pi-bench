@@ -1,7 +1,12 @@
 #include "utils.h"
 #include <pthread.h>
 using namespace std;
-// #define NUM_TRIAL NUM_ITER
+
+// experiment repetitions
+#define NUM_TRIAL  10000
+#define NUM_ITER   200
+#define NUM_UNROLL 5
+unsigned long time_trials[NUM_TRIAL];
 
 void * RunThread(void * ) {
     pthread_exit(NULL);

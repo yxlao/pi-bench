@@ -4,8 +4,14 @@
 #include "utils.h"
 using namespace std;
 
+// experiment repetitions
+#define NUM_TRIAL  10000
+#define NUM_ITER   200
+#define NUM_UNROLL 5
+unsigned long time_trials[NUM_TRIAL];
+
 int main() {
-    int i, j, sum = 0;
+    int i, j = 0;
     int * data = new int[1048576];//4MByte = 1M integers = 2 ^ 20 integers = 1048576 integers
     //read test
     for (i = 0; i < NUM_TRIAL; i++) {

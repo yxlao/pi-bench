@@ -2,7 +2,12 @@
 #include <time.h>
 #include <stdlib.h>
 #include "utils.h"
-using namespace std;
+
+// experiment repetitions
+#define NUM_TRIAL  10000
+#define NUM_ITER   200
+#define NUM_UNROLL 5
+unsigned long time_trials[NUM_TRIAL];
 
 int main() {
   int size = 1, ind, temp;
@@ -21,13 +26,13 @@ int main() {
       GET_CCNT(time_end);
       time_trials[i] = time_end - time_start;
     }
-    cout << s << ": " << size << endl;
+    std::cout << s << ": " << size << std::endl;
     print_trimmed_mean_std(time_trials, NUM_TRIAL, 1, 1);
     size = size * 2;
     delete data;
-  } 
-
- // delete data;
-  //delete[] my_time_trials;
+  }
+  (void) temp;
+  // delete data;
+  // delete[] my_time_trials;
   return 0;
 }
