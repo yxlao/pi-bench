@@ -6,9 +6,9 @@
 #include <fstream> // for ofstream
 
 // experiment repetitions
-#define NUM_TRIAL  10000
-#define NUM_ITER   200
-#define NUM_UNROLL 5
+#define NUM_TRIAL  100
+#define NUM_ITER   1
+#define NUM_UNROLL 1
 unsigned long time_trials[NUM_TRIAL];
 
 int main(int argc, char *argv[]){
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]){
     int i;
     long page_size = sysconf(_SC_PAGESIZE);
     std::cout << "page size: " << page_size << " address of data: " << (unsigned long) data << std::endl;
-    for (i = 0; i < 1535 && j >= 0; ++i) {
+    for (i = 0; i < NUM_TRIAL && j >= 0; ++i) {
         RESET_CCNT;
         GET_CCNT(time_start);
         //Loop on mem size
@@ -55,7 +55,6 @@ int main(int argc, char *argv[]){
 
     ofs.close();
 
-
-    print_all_stats(time_trials, i, 1, 1);
+    print_all_stats(time_trials, i, NUM_ITER, NUM_UNROLL);
     return 0;
 }

@@ -32,6 +32,7 @@ int main() {
         time_trials[i] = time_end - time_start;
     }
     print_trimmed_mean_std(time_trials, NUM_TRIAL, 1, 1);
+    (void) sum;  // make g++ "unused variable" go away
     delete data;
     return 0;
 }
