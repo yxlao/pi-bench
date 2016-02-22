@@ -31,7 +31,7 @@ int main() {
       GET_CCNT(time_end);
     //  data[ind] = temp;
       time_trials[i] = time_end - time_start;
-      ind += 32;
+      ind += 8;
     }
     std::cout << s << ": " << size << std::endl;
     print_trimmed_mean_std(time_trials, NUM_TRIAL, 1, 1);
