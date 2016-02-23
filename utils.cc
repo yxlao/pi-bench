@@ -91,20 +91,22 @@ void print_stats(unsigned long* data, int num_trial, int num_iter,
               << "num_unroll: " << num_unroll << std::endl
               << "mean_op: " << mean_op << std::endl
               << "mean_trial: " << mean << std::endl
-              << "std_trail: " << sd << std::endl
+              << "std_trial: " << sd << std::endl
               << "min_trial: " << min_val << std::endl
               << "max_trial: " << max_val << std::endl;
 }
 
 void print_trimmed_mean_std(unsigned long* data, int num_trial, int num_iter,
                             int num_unroll) {
-    // int trimmed_num_trail = trim_outlier(data, num_trial);
+    // int trimmed_num_trial = trim_outlier(data, num_trial);
     trim_outlier(data, num_trial);
     float mean = get_mean(data, num_trial);
     float sd = get_sd(data, num_trial);
     float mean_op = mean / (float) num_iter / (float) num_unroll;
     float sd_op = sd / (float) num_iter / (float) num_unroll;
-    std::cout << "mean_op: " << mean_op << " "
+    std::cout << "mean_trial: " << mean << std::endl
+              << "std_trial: " << sd << std::endl
+              << "mean_op: " << mean_op << std::endl
               << "std_op: " << sd_op << std::endl;
 
 }
@@ -114,7 +116,7 @@ void print_all_stats(unsigned long* data, int num_trial, int num_iter,
     std::cout << "[original stats]" << std::endl;
     print_stats(data, num_trial, num_iter, num_unroll);
 
-    int trimmed_num_trail = trim_outlier(data, num_trial);
+    int trimmed_num_trial = trim_outlier(data, num_trial);
     std::cout << "[trimmed stats]" << std::endl;
-    print_stats(data, trimmed_num_trail, num_iter, num_unroll);
+    print_stats(data, trimmed_num_trial, num_iter, num_unroll);
 }
