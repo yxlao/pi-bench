@@ -31,7 +31,8 @@ int main() {
         time_trials[i] = time_end - time_start;
     }
     std::cout << "##### Procedure call fun0" << std::endl;
-    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    // print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    print_trimmed_mean_std(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
     for (int i = 0; i < NUM_TRIAL; ++i) {
@@ -47,7 +48,8 @@ int main() {
         time_trials[i] = time_end - time_start;
     }
     std::cout << "##### Procedure call fun1" << std::endl;
-    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    // print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    print_trimmed_mean_std(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
 
     RESET_CCNT;
@@ -64,7 +66,8 @@ int main() {
         time_trials[i] = time_end - time_start;
     }
     std::cout << "##### Procedure call fun2" << std::endl;
-    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    // print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    print_trimmed_mean_std(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
     for (int i = 0; i < NUM_TRIAL; ++i) {
@@ -80,7 +83,8 @@ int main() {
         time_trials[i] = time_end - time_start;
     }
     std::cout << "##### Procedure call fun3" << std::endl;
-    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    // print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    print_trimmed_mean_std(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
     for (int i = 0; i < NUM_TRIAL; ++i) {
@@ -96,7 +100,8 @@ int main() {
         time_trials[i] = time_end - time_start;
     }
     std::cout << "##### Procedure call fun4" << std::endl;
-    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    // print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    print_trimmed_mean_std(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
     for (int i = 0; i < NUM_TRIAL; ++i) {
@@ -112,7 +117,8 @@ int main() {
         time_trials[i] = time_end - time_start;
     }
     std::cout << "##### Procedure call fun5" << std::endl;
-    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    // print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    print_trimmed_mean_std(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
     for (int i = 0; i < NUM_TRIAL; ++i) {
@@ -128,7 +134,8 @@ int main() {
         time_trials[i] = time_end - time_start;
     }
     std::cout << "##### Procedure call fun6" << std::endl;
-    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    // print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    print_trimmed_mean_std(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
     for (int i = 0; i < NUM_TRIAL; ++i) {
@@ -144,7 +151,8 @@ int main() {
         time_trials[i] = time_end - time_start;
     }
     std::cout << "##### Procedure call fun7" << std::endl;
-    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    // print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
+    print_trimmed_mean_std(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     return 0;
 }
