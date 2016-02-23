@@ -11,7 +11,7 @@
 #define NUM_UNROLL 1
 unsigned long time_trials[NUM_TRIAL];
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]) {
     int fd = open("/home/pi/random.img", O_RDONLY);
     struct stat s;
     fstat (fd, & s);
@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
     std::ofstream ofs;
     ofs.open ("m3_output.txt", std::ofstream::out | std::ofstream::app);
     for (int k = 0; k < i; ++k) {
-    ofs << time_trials[k] << std::endl;
+        ofs << time_trials[k] << std::endl;
     }
 
     ofs.close();
