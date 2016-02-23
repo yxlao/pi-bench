@@ -6,19 +6,19 @@
 #include <fstream> // for ofstream
 
 // experiment repetitions
-#define NUM_TRIAL  100
+#define NUM_TRIAL  10000
 #define NUM_ITER   1
 #define NUM_UNROLL 1
 unsigned long time_trials[NUM_TRIAL];
 
 int main(int argc, char *argv[]){
-    int fd = open("/home/pi/page_file.img", O_RDONLY);
+    int fd = open("/home/pi/random.img", O_RDONLY);
     struct stat s;
     fstat (fd, & s);
     size_t size = s.st_size;
     std::cout << "size of file: " << size << std::endl;
     char* data = (char*) mmap(0, size, PROT_READ, MAP_PRIVATE, fd, 0);
-    int x;
+    int x = 123;
 
     int j = size - 1;
     int i;
@@ -30,15 +30,15 @@ int main(int argc, char *argv[]){
         //Loop on mem size
         x += data[j];
         GET_CCNT(time_end);
-        j -= 1048576;
+        j -= 524288;
 
-        int fd2;
-        char const* data = "3";
+        // int fd2;
+        // char const* data = "3";
 
-        sync();
-        fd2 = open("/proc/sys/vm/drop_caches", O_WRONLY);
-        write(fd2, data, sizeof(char));
-        close(fd2);
+        // sync();
+        // fd2 = open("/proc/sys/vm/drop_caches", O_WRONLY);
+        // write(fd2, data, sizeof(char));
+        // close(fd2);
 
         time_trials[i] = time_end - time_start;
         // if (i < 100)
