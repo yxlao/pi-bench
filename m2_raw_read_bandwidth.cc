@@ -42,23 +42,23 @@ int main() {
           flush_read(cache_data, CACHE_FLUSH_SIZE);
           RESET_CCNT;
           GET_CCNT(time_start);
-          for (int j = 0; j < MAX_CHAR_ARRAY_SIZE; j += 512) {
+          for (int j = 0; j < MAX_CHAR_ARRAY_SIZE; j += 1) {
                temp = data[j];
-               temp = data[j + 32];
-               temp = data[j + 64];
-               temp = data[j + 96];
-               temp = data[j + 128];
-               temp = data[j + 160];
-               temp = data[j + 192];
-               temp = data[j + 224];
-               temp = data[j + 256];
-               temp = data[j + 288];
-               temp = data[j + 320];
-               temp = data[j + 352];
-               temp = data[j + 384];
-               temp = data[j + 416];
-               temp = data[j + 448];
-               temp = data[j + 480];
+               // temp = data[j + 32];
+               // temp = data[j + 64];
+               // temp = data[j + 96];
+               // temp = data[j + 128];
+               // temp = data[j + 160];
+               // temp = data[j + 192];
+               // temp = data[j + 224];
+               // temp = data[j + 256];
+               // temp = data[j + 288];
+               // temp = data[j + 320];
+               // temp = data[j + 352];
+               // temp = data[j + 384];
+               // temp = data[j + 416];
+               // temp = data[j + 448];
+               // temp = data[j + 480];
           }
           GET_CCNT(time_end);
           time_trials[i] = time_end - time_start;

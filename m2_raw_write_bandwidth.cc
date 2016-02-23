@@ -42,23 +42,23 @@ int main() {
         flush_read(cache_data, CACHE_FLUSH_SIZE);
         RESET_CCNT;
         GET_CCNT(time_start);
-        for (int j = 0; j < MAX_CHAR_ARRAY_SIZE; j += 512) {
+        for (int j = 0; j < MAX_CHAR_ARRAY_SIZE; j += 1) {
             data[j] = 'a';
-            data[j + 32] = 'a';
-            data[j + 64] = 'a';
-            data[j + 96] = 'a';
-            data[j + 128] = 'a';
-            data[j + 160] = 'a';
-            data[j + 192] = 'a';
-            data[j + 224] = 'a';
-            data[j + 256] = 'a';
-            data[j + 288] = 'a';
-            data[j + 320] = 'a';
-            data[j + 352] = 'a';
-            data[j + 384] = 'a';
-            data[j + 416] = 'a';
-            data[j + 448] = 'a';
-            data[j + 480] = 'a';
+            // data[j + 32] = 'a';
+            // data[j + 64] = 'a';
+            // data[j + 96] = 'a';
+            // data[j + 128] = 'a';
+            // data[j + 160] = 'a';
+            // data[j + 192] = 'a';
+            // data[j + 224] = 'a';
+            // data[j + 256] = 'a';
+            // data[j + 288] = 'a';
+            // data[j + 320] = 'a';
+            // data[j + 352] = 'a';
+            // data[j + 384] = 'a';
+            // data[j + 416] = 'a';
+            // data[j + 448] = 'a';
+            // data[j + 480] = 'a';
         }
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
