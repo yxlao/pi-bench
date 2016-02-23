@@ -30,7 +30,7 @@ int main() {
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
     }
-    std::cout << "## Procedure call fun0" << std::endl;
+    std::cout << "##### Procedure call fun0" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
@@ -46,7 +46,7 @@ int main() {
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
     }
-    std::cout << "## Procedure call fun1" << std::endl;
+    std::cout << "##### Procedure call fun1" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
 
@@ -63,7 +63,7 @@ int main() {
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
     }
-    std::cout << "## Procedure call fun2" << std::endl;
+    std::cout << "##### Procedure call fun2" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
@@ -79,7 +79,7 @@ int main() {
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
     }
-    std::cout << "## Procedure call fun3" << std::endl;
+    std::cout << "##### Procedure call fun3" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
@@ -95,7 +95,7 @@ int main() {
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
     }
-    std::cout << "## Procedure call fun4" << std::endl;
+    std::cout << "##### Procedure call fun4" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
@@ -111,7 +111,7 @@ int main() {
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
     }
-    std::cout << "## Procedure call fun5" << std::endl;
+    std::cout << "##### Procedure call fun5" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
@@ -127,7 +127,7 @@ int main() {
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
     }
-    std::cout << "## Procedure call fun6" << std::endl;
+    std::cout << "##### Procedure call fun6" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     RESET_CCNT;
@@ -143,7 +143,7 @@ int main() {
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
     }
-    std::cout << "## Procedure call fun7" << std::endl;
+    std::cout << "##### Procedure call fun7" << std::endl;
     print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     return 0;
