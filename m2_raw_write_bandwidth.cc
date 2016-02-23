@@ -22,22 +22,22 @@ int main() {
         RESET_CCNT;
         GET_CCNT(time_start);
         for (j = 0; j < 261664; j += 512) {
-           data[j] = 'a';
-           data[j + 32] = 'a';
-           data[j + 64] = 'a';
-           data[j + 96] = 'a';
-           data[j + 128] = 'a';
-           data[j + 160] = 'a';
-           data[j + 192] = 'a';
-           data[j + 224] = 'a';
-           data[j + 256] = 'a';
-           data[j + 288] = 'a';
-           data[j + 320] = 'a';
-           data[j + 352] = 'a';
-           data[j + 384] = 'a';
-           data[j + 416] = 'a';
-           data[j + 448] = 'a';
-           data[j + 480] = 'a';
+            data[j] = 'a';
+            data[j + 32] = 'a';
+            data[j + 64] = 'a';
+            data[j + 96] = 'a';
+            data[j + 128] = 'a';
+            data[j + 160] = 'a';
+            data[j + 192] = 'a';
+            data[j + 224] = 'a';
+            data[j + 256] = 'a';
+            data[j + 288] = 'a';
+            data[j + 320] = 'a';
+            data[j + 352] = 'a';
+            data[j + 384] = 'a';
+            data[j + 416] = 'a';
+            data[j + 448] = 'a';
+            data[j + 480] = 'a';
         }
         GET_CCNT(time_end);
         time_trials[i] = time_end - time_start;
