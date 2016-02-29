@@ -43,14 +43,14 @@ int main(void) {
 
         // chlid send message
         if (!fork()) { // this is the child process
-            close(sockfd); // child doesn't need the listener
+            tcp_close(sockfd); // child doesn't need the listener
             tcp_send(new_fd, hello_message);
-            close(new_fd);
+            tcp_close(new_fd);
             exit(0);
         }
 
         // parent clean up
-        close(new_fd);
+        tcp_close(new_fd);
     }
 
     return 0;

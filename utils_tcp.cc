@@ -36,6 +36,10 @@ int tcp_receive(int sockfd, char *buf) {
 }
 
 void tcp_close(int sockfd) {
+    close(sockfd);
+}
+
+void tcp_shutdown_close(int sockfd) {
     shutdown(sockfd, SHUT_RDWR);
     close(sockfd);
 }

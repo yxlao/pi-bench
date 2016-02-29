@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     printf("client: received '%s'\n",buf);
 
     // clean up
-    tcp_close(sockfd);
+    tcp_shutdown_close(sockfd);
 
     return 0;
 }

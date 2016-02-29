@@ -11,6 +11,7 @@
 int tcp_send(int sockfd, char *buf);
 int tcp_receive(int sockfd, char *buf);
 void tcp_close(int sockfd);
+void tcp_shutdown_close(int sockfd);
 
 // server
 int tcp_server_bind(char *port);
