@@ -10,7 +10,7 @@
 #include <arpa/inet.h>   // internet operations, in_addr_t, in_addr
 #include "utils_tcp.h"
 
-void tcp_send(int sockfd, char *buf) {
+int tcp_send(int sockfd, char *buf) {
     int len, numbytes;
     len = strlen(buf);
     if ((numbytes = send(sockfd, buf, len, 0)) == -1) {
@@ -20,6 +20,7 @@ void tcp_send(int sockfd, char *buf) {
     if (numbytes != len) {
         fprintf(stderr, "send: sending incomplete\n");
     }
+    return numbytes;
 }
 
 int tcp_receive(int sockfd, char *buf) {

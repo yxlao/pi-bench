@@ -6,7 +6,7 @@
 #define STATE_RUN  2
 #define STATE_BYE  3
 
-void tcp_send(int sockfd, void* buf);
+int tcp_send(int sockfd, char *buf);
 int tcp_receive(int sockfd, char *buf);
 int tcp_connect (char *addr, char *port);
 void tcp_close(int sockfd);
