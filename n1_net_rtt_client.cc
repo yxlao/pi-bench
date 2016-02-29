@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
 
     // check args
     if (argc != 2) {
-        fprintf(stderr,"usage: client hostname\n");
+        fprintf(stderr, "usage: client hostname\n");
         exit(1);
     }
 
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
 
     // print message
     buf[numbytes] = '\0';
-    printf("client: received '%s'\n",buf);
+    printf("client: received '%s'\n", buf);
 
     // clean up
     tcp_shutdown_close(sockfd);
