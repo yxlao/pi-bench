@@ -2,6 +2,7 @@
 !*.*
 !Makefile
 !rasbian-crr/*
+!*/
 
 *.log
 *.txt
