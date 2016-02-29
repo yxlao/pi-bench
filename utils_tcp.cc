@@ -53,6 +53,7 @@ void sigchld_handler(int s) {
     errno = saved_errno;
 }
 
+// server bind to a tcp port
 int tcp_server_bind(char *port) {
     int sockfd;  // listen on sock_fd
     struct addrinfo hints, *servinfo, *p;
@@ -117,6 +118,29 @@ int tcp_server_bind(char *port) {
     return sockfd;
 }
 
+// server accept incomming connection
+// only one trail, give freedom of control to caller function
+int tcp_server_accept(int sockfd) {
+    int new_fd;
+    char s[INET6_ADDRSTRLEN];
+    struct sockaddr_storage their_addr; // connector's address information
+
+    socklen_t sin_size;
+    sin_size = sizeof their_addr;
+    new_fd = accept(sockfd, (struct sockaddr *)&their_addr, &sin_size);
+    if (new_fd == -1) {
+        perror("accept");
+        return -1;
+    }
+
+    inet_ntop(their_addr.ss_family,
+              get_in_addr((struct sockaddr *)&their_addr),
+              s, sizeof s);
+    printf("server: got connection from %s\n", s);
+    return new_fd;
+}
+
+// client connect to addr and port
 int tcp_client_connect(char *addr, char *port) {
     int sockfd;
     struct addrinfo hints, *servinfo, *p;

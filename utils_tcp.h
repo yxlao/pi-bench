@@ -7,10 +7,16 @@
 #define STATE_BYE  3
 #define BACKLOG 10 // how many pending connections queue will hold, for server
 
+// basic funtions
 int tcp_send(int sockfd, char *buf);
 int tcp_receive(int sockfd, char *buf);
-int tcp_client_connect(char *addr, char *port);
-int tcp_server_bind(char *port);
 void tcp_close(int sockfd);
+
+// server
+int tcp_server_bind(char *port);
+int tcp_server_accept(int sockfd);
+
+// client
+int tcp_client_connect(char *addr, char *port);
 
 #endif
