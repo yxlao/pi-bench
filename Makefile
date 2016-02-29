@@ -76,3 +76,6 @@ temp:
 
 clean:
 	rm -rf *.o $(BINS)
+
+clean_net:
+	rm -rf $(OBJS_NETWORK) $(BINS_NETWORK)
