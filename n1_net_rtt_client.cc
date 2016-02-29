@@ -16,7 +16,8 @@ int main(int argc, char *argv[]) {
     }
 
     // connect tcp
-    int sockfd = tcp_client_connect(argv[1], PORT);
+    char port[] = PORT;
+    int sockfd = tcp_client_connect(argv[1], port);
 
     // receive message
     numbytes = tcp_receive(sockfd, buf);
