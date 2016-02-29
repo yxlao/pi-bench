@@ -7,7 +7,7 @@ OBJS_THREAD = $(patsubst %.cc,%.o,$(CPPS_THREAD))
 BINS_THREAD = $(patsubst %.cc,%,$(CPPS_THREAD))
 
 # network
-CPPS_NETWORK = $(wildcard *network*.cc)
+CPPS_NETWORK = $(wildcard *net*.cc)
 OBJS_NETWORK = $(patsubst %.cc,%.o,$(CPPS_NETWORK))
 BINS_NETWORK = $(patsubst %.cc,%,$(CPPS_NETWORK))
 
