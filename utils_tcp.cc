@@ -35,6 +35,11 @@ int tcp_receive(int sockfd, char *buf) {
     return numbytes;
 }
 
+void tcp_close(int sockfd) {
+    shutdown(sockfd, SHUT_RDWR);
+    close(sockfd);
+}
+
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa) {
     if (sa->sa_family == AF_INET) {
@@ -185,9 +190,4 @@ int tcp_client_connect(char *addr, char *port) {
 
     freeaddrinfo(servinfo);
     return sockfd;
-}
-
-void tcp_close(int sockfd) {
-    shutdown(sockfd, SHUT_RDWR);
-    close(sockfd);
 }
