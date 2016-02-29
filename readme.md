@@ -31,3 +31,12 @@ $ sudo make
 $ sudo insmod enable-ccr.ko
 ```
 
+## Network (Hello world for now)
+In one terminal
+```sh
+./n1_net_rtt_server
+```
+In another terminal
+```sh
+./n1_net_rtt_client localhost
+```
