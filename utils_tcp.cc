@@ -32,10 +32,21 @@ int tcp_receive(int sockfd, char *buf) {
     return numbytes;
 }
 
+// get sockaddr, IPv4 or IPv6:
+void *get_in_addr(struct sockaddr *sa) {
+    if (sa->sa_family == AF_INET) {
+        return &(((struct sockaddr_in*)sa)->sin_addr);
+    }
+
+    return &(((struct sockaddr_in6*)sa)->sin6_addr);
+}
+
 int tcp_connect(char *addr, char *port) {
     int sockfd;
     struct addrinfo hints, *servinfo, *p;
     int status;
+    char s[INET6_ADDRSTRLEN];
+
     // set hints to the desired value, and get struct addrinfo
     memset(&hints, 0, sizeof hints); // memset does not allocate memory
     hints.ai_family = AF_UNSPEC; // don't care IsockfdPv4 or IPv6
@@ -67,6 +78,10 @@ int tcp_connect(char *addr, char *port) {
         fprintf(stderr, "client: failed to connect\n");
         return 2;
     }
+
+    inet_ntop(p->ai_family, get_in_addr((struct sockaddr *)p->ai_addr),
+              s, sizeof s);
+    printf("client: connecting to %s\n", s);
 
     freeaddrinfo(servinfo);
     return sockfd;
