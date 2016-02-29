@@ -25,6 +25,16 @@ int tcp_send(int sockfd, char *buf) {
     return numbytes;
 }
 
+// currently cannot get numbytes yet
+void tcp_fork_and_send(int sockfd, int new_fd, char *buf) {
+    if (!fork()) { // this is the child process
+        tcp_close(sockfd); // child doesn't need the listener
+        tcp_send(new_fd, buf);
+        tcp_close(new_fd);
+        exit(0);
+    }
+}
+
 int tcp_receive(int sockfd, char *buf) {
     int numbytes = -1;
     if ((numbytes = recv(sockfd, buf, MAX_PACKET_SIZE - 1, 0)) == -1) {

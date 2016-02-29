@@ -9,6 +9,7 @@
 
 // basic funtions
 int tcp_send(int sockfd, char *buf);
+void tcp_fork_and_send(int sockfd, int new_fd, char *buf);
 int tcp_receive(int sockfd, char *buf);
 void tcp_close(int sockfd);
 void tcp_shutdown_close(int sockfd);

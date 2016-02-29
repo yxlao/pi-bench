@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include "utils_tcp.h"
 #include "utils.h"
 
@@ -22,12 +21,7 @@ int main(void) {
         }
 
         // chlid send message
-        if (!fork()) { // this is the child process
-            tcp_close(sockfd); // child doesn't need the listener
-            tcp_send(new_fd, hello_message);
-            tcp_close(new_fd);
-            exit(0);
-        }
+        tcp_fork_and_send(sockfd, new_fd, hello_message);
 
         // parent clean up
         tcp_close(new_fd);
