@@ -11,6 +11,7 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include "utils_tcp.h"
+#include "utils.h"
 
 #define PORT "3490"  // the port users will be connecting to
 
@@ -115,8 +116,9 @@ int main(void)
 
         if (!fork()) { // this is the child process
             close(sockfd); // child doesn't need the listener
-            if (send(new_fd, "Hello, world!", 13, 0) == -1)
-                perror("send");
+            tcp_send(new_fd, "Hello, world!");
+            // if (send(new_fd, "Hello, world!", 13, 0) == -1)
+            //     perror("send");
             close(new_fd);
             exit(0);
         }
