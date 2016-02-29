@@ -42,7 +42,7 @@ void *get_in_addr(struct sockaddr *sa) {
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
 
-int tcp_connect(char *addr, char *port) {
+int tcp_client_connect(char *addr, char *port) {
     int sockfd;
     struct addrinfo hints, *servinfo, *p;
     int status;

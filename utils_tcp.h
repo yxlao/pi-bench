@@ -8,7 +8,7 @@
 
 int tcp_send(int sockfd, char *buf);
 int tcp_receive(int sockfd, char *buf);
-int tcp_connect (char *addr, char *port);
+int tcp_client_connect(char *addr, char *port);
 void tcp_close(int sockfd);
 
 #endif
