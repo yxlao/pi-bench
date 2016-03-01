@@ -7,6 +7,8 @@
 #define STATE_BYE  3
 #define BACKLOG 10 // how many pending connections queue will hold, for server
 
+extern char MSG_INIT[];
+
 // basic funtions
 int tcp_send(int sockfd, char *buf);
 void tcp_fork_and_send(int sockfd, int new_fd, char *buf);

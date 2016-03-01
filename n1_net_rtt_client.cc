@@ -1,5 +1,6 @@
 #include "utils_tcp.h"
 #include "utils.h"
+#include <string.h>
 
 #define PORT "3490" // the port client will be connecting to
 #define MAXDATASIZE 100 // max number of bytes we can get at once
@@ -14,6 +15,8 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "usage: client hostname\n");
         exit(1);
     }
+
+    // int state = STATE_INIT;
 
     // connect tcp
     char port[] = PORT;

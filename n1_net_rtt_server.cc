@@ -6,9 +6,6 @@
 int main(void) {
     int new_fd;
 
-    // hello message
-    char hello_message[] = "Hello, world!";
-
     // bind to port
     char port[] = PORT;
     int sockfd = tcp_server_bind(port);
@@ -21,7 +18,7 @@ int main(void) {
         }
 
         // chlid send message
-        tcp_fork_and_send(sockfd, new_fd, hello_message);
+        tcp_fork_and_send(sockfd, new_fd, MSG_INIT);
 
         // parent clean up
         tcp_close(new_fd);

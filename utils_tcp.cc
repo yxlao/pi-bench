@@ -12,6 +12,8 @@
 #include <signal.h>
 #include "utils_tcp.h"
 
+char MSG_INIT[] = "INIT";
+
 int tcp_send(int sockfd, char *buf) {
     int len, numbytes;
     len = strlen(buf);
