@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    int num_bytes;
+    // int num_bytes;
     char port[] = PORT;
     char send_buf[MAX_DATA_SIZE];
     char recv_buf[MAX_DATA_SIZE];

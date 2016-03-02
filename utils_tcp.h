@@ -1,7 +1,7 @@
 #ifndef TCP_UTILS_H_
 #define TCP_UTILS_H_
 
-#define MAX_DATA_SIZE 2048
+#define MAX_DATA_SIZE 1024
 #define MAX_RTT_DATA_SIZE 2
 #define STATE_INIT 1
 #define STATE_RUN  2
@@ -13,8 +13,10 @@ extern char MSG_EMPTY[];
 
 // basic funtions
 int tcp_send(int sockfd, char *buf);
+// int tcp_simple_send(int sockfd, char *buf);
 void tcp_fork_and_send(int sockfd, int new_fd, char *buf);
 int tcp_receive(int sockfd, char *buf);
+// int tcp_simple_receive(int sockfd, char *buf);
 void tcp_close(int sockfd);
 void tcp_shutdown_close(int sockfd);
 
