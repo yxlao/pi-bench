@@ -21,10 +21,11 @@ int main(void) {
     }
 
     // chlid send message
-    tcp_fork_and_send(sockfd, new_fd, MSG_INIT);
+    tcp_send(new_fd, MSG_INIT);
 
     // parent clean up
-    tcp_close(new_fd);
+    tcp_shutdown_close(new_fd);
+    tcp_shutdown_close(sockfd);
 
     return 0;
 }
