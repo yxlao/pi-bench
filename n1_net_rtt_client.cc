@@ -1,5 +1,7 @@
 #include "utils_tcp.h"
 #include "utils.h"
+#include <unistd.h> // for sleep
+#include <assert.h>
 #include <string.h>
 
 #define PORT "3490" // the port client will be connecting to
@@ -7,30 +9,37 @@
 
 
 int main(int argc, char *argv[]) {
-    int numbytes;
-    char buf[MAXDATASIZE];
-
     // check args
     if (argc != 2) {
         fprintf(stderr, "usage: client hostname\n");
         exit(1);
     }
 
-    // int state = STATE_INIT;
+    int num_bytes;
+    char port[] = PORT;
+    char buf[MAXDATASIZE];
+    unsigned int microseconds = 1000000;
 
     // connect tcp
-    char port[] = PORT;
-    int sockfd = tcp_client_connect(argv[1], port);
+    int server_fd = tcp_client_connect(argv[1], port);
 
-    // receive message
-    numbytes = tcp_receive(sockfd, buf);
+    num_bytes = tcp_send(server_fd, MSG_INIT);
+    assert(num_bytes == 4);
+    printf("sent init packet\n");
 
-    // print message
-    buf[numbytes] = '\0';
-    printf("client: received '%s'\n", buf);
+    num_bytes = tcp_receive(server_fd, buf);
+    assert(num_bytes == 4);
+    printf("received init packet\n");
 
-    // clean up
-    tcp_shutdown_close(sockfd);
+    num_bytes = tcp_send(server_fd, MSG_INIT);
+    assert(num_bytes == 4);
+    printf("sent init packet\n");
+
+    num_bytes = tcp_receive(server_fd, buf);
+    assert(num_bytes == 4);
+    printf("received init packet\n");
+
+    tcp_shutdown_close(server_fd);
 
     return 0;
 }

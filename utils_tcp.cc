@@ -13,6 +13,7 @@
 #include "utils_tcp.h"
 
 char MSG_INIT[] = "INIT";
+char MSG_EMPTY[] = "";
 
 int tcp_send(int sockfd, char *buf) {
     int len, numbytes;

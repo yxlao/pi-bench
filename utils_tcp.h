@@ -8,6 +8,7 @@
 #define BACKLOG 10 // how many pending connections queue will hold, for server
 
 extern char MSG_INIT[];
+extern char MSG_EMPTY[];
 
 // basic funtions
 int tcp_send(int sockfd, char *buf);
