@@ -13,10 +13,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-
 #define PORT "3490" // the port client will be connecting to
-#define NUM_TRIAL  100
-#define NUM_ITER   2
+#define NUM_TRIAL  500
+#define NUM_ITER   200
 #define NUM_UNROLL 5
 unsigned long time_trials[NUM_TRIAL];
 
@@ -43,26 +42,26 @@ int main(int argc, char *argv[]) {
             RESET_CCNT;
             GET_CCNT(time_start);
             for (int j = 0; j < NUM_ITER; ++j) {
-                write(server_fd,"-",1);
-                read(server_fd,&recv_buf,1);
-                write(server_fd,"-",1);
-                read(server_fd,&recv_buf,1);
-                write(server_fd,"-",1);
-                read(server_fd,&recv_buf,1);
-                write(server_fd,"-",1);
-                read(server_fd,&recv_buf,1);
-                write(server_fd,"-",1);
-                read(server_fd,&recv_buf,1);
-                // tcp_send(server_fd, send_buf);
-                // tcp_receive(server_fd, recv_buf);
-                // tcp_send(server_fd, send_buf);
-                // tcp_receive(server_fd, recv_buf);
-                // tcp_send(server_fd, send_buf);
-                // tcp_receive(server_fd, recv_buf);
-                // tcp_send(server_fd, send_buf);
-                // tcp_receive(server_fd, recv_buf);
-                // tcp_send(server_fd, send_buf);
-                // tcp_receive(server_fd, recv_buf);
+                // write(server_fd,"-",1);
+                // read(server_fd,&recv_buf,1);
+                // write(server_fd,"-",1);
+                // read(server_fd,&recv_buf,1);
+                // write(server_fd,"-",1);
+                // read(server_fd,&recv_buf,1);
+                // write(server_fd,"-",1);
+                // read(server_fd,&recv_buf,1);
+                // write(server_fd,"-",1);
+                // read(server_fd,&recv_buf,1);
+                tcp_send(server_fd, send_buf);
+                tcp_receive(server_fd, recv_buf);
+                tcp_send(server_fd, send_buf);
+                tcp_receive(server_fd, recv_buf);
+                tcp_send(server_fd, send_buf);
+                tcp_receive(server_fd, recv_buf);
+                tcp_send(server_fd, send_buf);
+                tcp_receive(server_fd, recv_buf);
+                tcp_send(server_fd, send_buf);
+                tcp_receive(server_fd, recv_buf);
             }
             GET_CCNT(time_end);
             time_trials[i] = time_end - time_start;
