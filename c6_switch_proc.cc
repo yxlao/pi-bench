@@ -27,6 +27,8 @@ int main() {
         cpid = fork();
         if (cpid != 0) {
             // parent
+            close(c2p[1]);
+            close(p2c[0]);
             temp = 123124;
             GET_CCNT(time_start);
             read(c2p[0], &temp, sizeof(unsigned long));
@@ -37,8 +39,10 @@ int main() {
             GET_CCNT(time_end);
             wait(NULL); // wait all child process to finish
         } else {
-            temp = 100;
             // children
+            close(c2p[0]);
+            close(p2c[1]);
+            temp = 100;
             write(c2p[1], &temp, sizeof(unsigned long));
             std::cout << "child write " << temp << std::endl;
             read(p2c[0], &temp, sizeof(unsigned long));
