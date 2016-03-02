@@ -40,3 +40,6 @@ In another terminal
 ```sh
 ./n1_net_rtt_client localhost
 ```
+
+## List of references
+* [Beej's Guide to Network Programming](http://beej.us/guide/bgnet/output/html/multipage/clientserver.html)
