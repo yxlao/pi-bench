@@ -15,14 +15,16 @@ int main(void) {
         new_fd = tcp_server_accept(sockfd);
         if (new_fd == -1) {
             continue;
+        } else {
+            break;
         }
-
-        // chlid send message
-        tcp_fork_and_send(sockfd, new_fd, MSG_INIT);
-
-        // parent clean up
-        tcp_close(new_fd);
     }
+
+    // chlid send message
+    tcp_fork_and_send(sockfd, new_fd, MSG_INIT);
+
+    // parent clean up
+    tcp_close(new_fd);
 
     return 0;
 }
