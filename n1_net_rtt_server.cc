@@ -4,7 +4,7 @@
 #define PORT "3490"  // the port users will be connecting to
 
 int main(void) {
-    int new_fd;
+    int client_fd;
 
     // bind to port
     char port[] = PORT;
@@ -12,8 +12,8 @@ int main(void) {
 
     while (1) {
         // get incoming connection
-        new_fd = tcp_server_accept(sockfd);
-        if (new_fd == -1) {
+        client_fd = tcp_server_accept(sockfd);
+        if (client_fd == -1) {
             continue;
         } else {
             break;
@@ -21,10 +21,10 @@ int main(void) {
     }
 
     // chlid send message
-    tcp_send(new_fd, MSG_INIT);
+    tcp_send(client_fd, MSG_INIT);
 
     // parent clean up
-    tcp_shutdown_close(new_fd);
+    tcp_shutdown_close(client_fd);
     tcp_shutdown_close(sockfd);
 
     return 0;
