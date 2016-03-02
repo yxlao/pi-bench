@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
     int server_fd = tcp_client_connect(argv[1], port);
 
 
-    for (int s = 1; s <= MAX_TRIAL_DATA_SIZE; s = s * 2) {
+    for (int s = 1; s <= MAX_RTT_DATA_SIZE; s = s * 2) {
         // memset bytes to create string length s
         memset(send_buf, '-', MAX_DATA_SIZE);
         send_buf[s] = '\0';
