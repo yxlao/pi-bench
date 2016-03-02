@@ -5,7 +5,7 @@
 #include "utils.h"
 
 // experiment repetitions
-#define NUM_TRIAL  10000
+#define NUM_TRIAL  1
 #define NUM_ITER   200
 #define NUM_UNROLL 5
 unsigned long time_trials[NUM_TRIAL];
@@ -13,7 +13,10 @@ unsigned long time_trials[NUM_TRIAL];
 int main() {
     // pipes
     int c2p[2];
+    int p2c[2];
     pipe(c2p);
+    pipe(p2c);
+    int temp;
 
     // pid_t
     pid_t cpid;
@@ -24,14 +27,22 @@ int main() {
         cpid = fork();
         if (cpid != 0) {
             // parent
+            temp = 123124;
             GET_CCNT(time_start);
-            wait(NULL);
-            read(c2p[0], (void*)&time_end, sizeof(unsigned long));
-            // std::cout << "parent read 0" << std::endl;
-        } else {
-            // children
+            read(c2p[0], &temp, sizeof(unsigned long));
+            std::cout << "parent read " << temp << std::endl;
+            temp = 101;
+            write(p2c[1], &temp, sizeof(unsigned long));
+            std::cout << "parent write " << temp << std::endl;
             GET_CCNT(time_end);
-            write(c2p[1], (void*)&time_end, sizeof(unsigned long));
+            wait(NULL); // wait all child process to finish
+        } else {
+            temp = 100;
+            // children
+            write(c2p[1], &temp, sizeof(unsigned long));
+            std::cout << "child write " << temp << std::endl;
+            read(p2c[0], &temp, sizeof(unsigned long));
+            std::cout << "child read " << temp << std::endl;
             exit(1);
         }
         if (time_end > time_start) {
