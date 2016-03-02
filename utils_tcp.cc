@@ -12,8 +12,8 @@
 #include <signal.h>
 #include "utils_tcp.h"
 
-char MSG_INIT[] = "INIT";
 char MSG_EMPTY[] = "";
+char MSG_INIT[] = "INIT";
 
 int tcp_send(int sockfd, char *buf) {
     int len, numbytes;
@@ -40,7 +40,7 @@ void tcp_fork_and_send(int sockfd, int new_fd, char *buf) {
 
 int tcp_receive(int sockfd, char *buf) {
     int numbytes = -1;
-    if ((numbytes = recv(sockfd, buf, MAX_PACKET_SIZE - 1, 0)) == -1) {
+    if ((numbytes = recv(sockfd, buf, MAX_DATA_SIZE - 1, 0)) == -1) {
         perror("recv");
         exit(1);
     }

@@ -1,7 +1,8 @@
 #ifndef TCP_UTILS_H_
 #define TCP_UTILS_H_
 
-#define MAX_PACKET_SIZE 1024
+#define MAX_DATA_SIZE 2048
+#define MAX_TRIAL_DATA_SIZE 16
 #define STATE_INIT 1
 #define STATE_RUN  2
 #define STATE_BYE  3

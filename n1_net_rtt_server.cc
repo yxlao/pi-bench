@@ -3,7 +3,6 @@
 #include <assert.h>
 
 #define PORT "3490"  // the port users will be connecting to
-#define MAXDATASIZE 100 // max number of bytes we can get at once
 
 int main(void) {
     int client_fd;
@@ -11,7 +10,7 @@ int main(void) {
 
     // bind to port
     char port[] = PORT;
-    char buf[MAXDATASIZE];
+    char recv_buf[MAX_DATA_SIZE];
     int sockfd = tcp_server_bind(port);
 
     // accept client connection
@@ -25,21 +24,15 @@ int main(void) {
         }
     }
 
-    num_bytes = tcp_receive(client_fd, buf);
-    assert(num_bytes == 4);
-    printf("received init packet\n");
-
-    num_bytes = tcp_send(client_fd, MSG_INIT);
-    assert(num_bytes == 4);
-    printf("sent init packet\n");
-
-    num_bytes = tcp_receive(client_fd, buf);
-    assert(num_bytes == 4);
-    printf("received init packet\n");
-
-    num_bytes = tcp_send(client_fd, MSG_INIT);
-    assert(num_bytes == 4);
-    printf("sent init packet\n");
+    while (1) {
+        num_bytes = tcp_receive(client_fd, recv_buf);
+        printf("received size %d\n", num_bytes);
+        num_bytes = tcp_send(client_fd, recv_buf);
+        printf("sent size %d\n", num_bytes);
+        if (num_bytes == 0) { // client is offline, temp solution for now
+            break;
+        }
+    }
 
     tcp_shutdown_close(client_fd);
     tcp_shutdown_close(sockfd);
