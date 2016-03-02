@@ -6,6 +6,10 @@
 #include <string.h>
 
 #define PORT "3490" // the port client will be connecting to
+#define NUM_TRIAL  10
+#define NUM_ITER   20
+#define NUM_UNROLL 5
+unsigned long time_trials[NUM_TRIAL];
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
@@ -21,19 +25,38 @@ int main(int argc, char *argv[]) {
     // connect tcp
     int server_fd = tcp_client_connect(argv[1], port);
 
-
-    for (int s = 1; s <= MAX_RTT_DATA_SIZE; s = s * 2) {
-        // memset bytes to create string length s
+    for (int size = 1; size <= MAX_RTT_DATA_SIZE; size = size * 2) {
+        // memset bytes to create string length size
         memset(send_buf, '-', MAX_DATA_SIZE);
-        send_buf[s] = '\0';
+        send_buf[size] = '\0';
 
-        num_bytes = tcp_send(server_fd, send_buf);
-        printf("sent size %d\n", num_bytes);
-        assert(num_bytes == s);
+        for (int i = 0; i < NUM_TRIAL; ++i) {
+            RESET_CCNT;
+            GET_CCNT(time_start);
+            for (int j = 0; j < NUM_ITER; ++j) {
+                tcp_send(server_fd, send_buf);
+                tcp_receive(server_fd, recv_buf);
+                tcp_send(server_fd, send_buf);
+                tcp_receive(server_fd, recv_buf);
+                tcp_send(server_fd, send_buf);
+                tcp_receive(server_fd, recv_buf);
+                tcp_send(server_fd, send_buf);
+                tcp_receive(server_fd, recv_buf);
+                tcp_send(server_fd, send_buf);
+                tcp_receive(server_fd, recv_buf);
+            }
+            GET_CCNT(time_end);
+            time_trials[i] = time_end - time_start;
+        }
+        std::cout << "#### size: " << size << std::endl;
+        print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
-        num_bytes = tcp_receive(server_fd, recv_buf);
-        printf("received size %d\n", num_bytes);
-        assert(num_bytes == s);
+        // num_bytes = tcp_send(server_fd, send_buf);
+        // printf("sent size %d\n", num_bytes);
+        // assert(num_bytes == size);
+        // num_bytes = tcp_receive(server_fd, recv_buf);
+        // printf("received size %d\n", num_bytes);
+        // assert(num_bytes == size);
     }
 
     tcp_shutdown_close(server_fd);

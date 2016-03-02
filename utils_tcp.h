@@ -2,7 +2,7 @@
 #define TCP_UTILS_H_
 
 #define MAX_DATA_SIZE 2048
-#define MAX_RTT_DATA_SIZE 4
+#define MAX_RTT_DATA_SIZE 2
 #define STATE_INIT 1
 #define STATE_RUN  2
 #define STATE_BYE  3
