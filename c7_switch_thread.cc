@@ -24,10 +24,36 @@ void* producer(void *ptr) {
             while (buffer != 0) // if there is something in the buffer then wait
                 pthread_cond_wait(&condp, &the_mutex);
             buffer = 1;
-            // std::cout << "producer " << j << std::endl;
-            // std::cout.flush();
             pthread_cond_signal(&condc); // wake up consumer
             pthread_mutex_unlock(&the_mutex); // release the buffer
+
+            pthread_mutex_lock(&the_mutex);
+            while (buffer != 0)
+                pthread_cond_wait(&condp, &the_mutex);
+            buffer = 1;
+            pthread_cond_signal(&condc);
+            pthread_mutex_unlock(&the_mutex);
+
+            pthread_mutex_lock(&the_mutex);
+            while (buffer != 0)
+                pthread_cond_wait(&condp, &the_mutex);
+            buffer = 1;
+            pthread_cond_signal(&condc);
+            pthread_mutex_unlock(&the_mutex);
+
+            pthread_mutex_lock(&the_mutex);
+            while (buffer != 0)
+                pthread_cond_wait(&condp, &the_mutex);
+            buffer = 1;
+            pthread_cond_signal(&condc);
+            pthread_mutex_unlock(&the_mutex);
+
+            pthread_mutex_lock(&the_mutex);
+            while (buffer != 0)
+                pthread_cond_wait(&condp, &the_mutex);
+            buffer = 1;
+            pthread_cond_signal(&condc);
+            pthread_mutex_unlock(&the_mutex);
         }
 
         // end time
@@ -48,10 +74,36 @@ void* consumer(void *ptr) {
             while (buffer == 0) // if there is nothing in the buffer then wait
                 pthread_cond_wait(&condc, &the_mutex);
             buffer = 0;
-            // std::cout << "consumer " << j << std::endl;
-            // std::cout.flush();
             pthread_cond_signal(&condp); // wake up consumer
             pthread_mutex_unlock(&the_mutex); // release the buffer
+
+            pthread_mutex_lock(&the_mutex);
+            while (buffer == 0)
+                pthread_cond_wait(&condc, &the_mutex);
+            buffer = 0;
+            pthread_cond_signal(&condp);
+            pthread_mutex_unlock(&the_mutex);
+
+            pthread_mutex_lock(&the_mutex);
+            while (buffer == 0)
+                pthread_cond_wait(&condc, &the_mutex);
+            buffer = 0;
+            pthread_cond_signal(&condp);
+            pthread_mutex_unlock(&the_mutex);
+
+            pthread_mutex_lock(&the_mutex);
+            while (buffer == 0)
+                pthread_cond_wait(&condc, &the_mutex);
+            buffer = 0;
+            pthread_cond_signal(&condp);
+            pthread_mutex_unlock(&the_mutex);
+
+            pthread_mutex_lock(&the_mutex);
+            while (buffer == 0)
+                pthread_cond_wait(&condc, &the_mutex);
+            buffer = 0;
+            pthread_cond_signal(&condp);
+            pthread_mutex_unlock(&the_mutex);
         }
     }
     pthread_exit(0);
