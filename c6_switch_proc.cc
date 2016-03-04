@@ -2,61 +2,98 @@
 #include <sys/syscall.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <assert.h>
 #include "utils.h"
 
 // experiment repetitions
-#define NUM_TRIAL  1
+#define NUM_TRIAL  1000
 #define NUM_ITER   200
 #define NUM_UNROLL 5
 unsigned long time_trials[NUM_TRIAL];
 
 int main() {
     // pipes
-    int c2p[2];
-    int p2c[2];
-    pipe(c2p);
-    pipe(p2c);
-    int temp;
+    int child_to_parent[2];
+    int parent_to_child[2];
+    pipe(child_to_parent);
+    pipe(parent_to_child);
+
+    // msic vars
+    int unsigned_long_size = sizeof(unsigned long);
+    int msg_temp;
+    int msg_parent = 100;
+    int msg_child = 200;
+    assert(NUM_ITER % 2 == 0);
+    int half_num_iter = NUM_ITER / 2;
 
     // pid_t
     pid_t cpid;
 
-    for (int i = 0; i < NUM_TRIAL; ++i) {
-        RESET_CCNT;
-        // fork
-        cpid = fork();
-        if (cpid != 0) {
-            // parent
-            close(c2p[1]);
-            close(p2c[0]);
-            temp = 123124;
+    // fork
+    cpid = fork();
+
+    // parent
+    if (cpid != 0) {
+        // parent clean up
+        close(child_to_parent[1]);
+        close(parent_to_child[0]);
+
+        for (int i = 0; i < NUM_TRIAL; ++i) {
+            // start time
+            RESET_CCNT;
             GET_CCNT(time_start);
-            read(c2p[0], &temp, sizeof(unsigned long));
-            std::cout << "parent read " << temp << std::endl;
-            temp = 101;
-            write(p2c[1], &temp, sizeof(unsigned long));
-            std::cout << "parent write " << temp << std::endl;
+
+            // operation
+            for (int j = 0; j < half_num_iter; ++j) {
+                read(child_to_parent[0], &msg_temp, unsigned_long_size);
+                write(parent_to_child[1], &msg_parent, unsigned_long_size);
+                read(child_to_parent[0], &msg_temp, unsigned_long_size);
+                write(parent_to_child[1], &msg_parent, unsigned_long_size);
+                read(child_to_parent[0], &msg_temp, unsigned_long_size);
+                write(parent_to_child[1], &msg_parent, unsigned_long_size);
+                read(child_to_parent[0], &msg_temp, unsigned_long_size);
+                write(parent_to_child[1], &msg_parent, unsigned_long_size);
+                read(child_to_parent[0], &msg_temp, unsigned_long_size);
+                write(parent_to_child[1], &msg_parent, unsigned_long_size);
+            }
+
+            // end time
             GET_CCNT(time_end);
-            wait(NULL); // wait all child process to finish
-        } else {
-            // children
-            close(c2p[0]);
-            close(p2c[1]);
-            temp = 100;
-            write(c2p[1], &temp, sizeof(unsigned long));
-            std::cout << "child write " << temp << std::endl;
-            read(p2c[0], &temp, sizeof(unsigned long));
-            std::cout << "child read " << temp << std::endl;
-            exit(1);
+            if (time_end > time_start) {
+                time_trials[i] = time_end - time_start;
+            } else {
+                i--;
+            }
         }
-        if (time_end > time_start) {
-            time_trials[i] = time_end - time_start;
-        } else {
-            i--;
-        }
+
+        wait(NULL); // wait all child process to finish
     }
 
-    print_all_stats(time_trials, NUM_TRIAL, 1, 1);
+    // chilid
+    else {
+        // children clean up
+        close(child_to_parent[0]);
+        close(parent_to_child[1]);
+
+        for (int i = 0; i < NUM_TRIAL; ++i) {
+            for (int j = 0; j < half_num_iter; ++j) {
+                write(child_to_parent[1], &msg_child, unsigned_long_size);
+                read(parent_to_child[0], &msg_temp, unsigned_long_size);
+                write(child_to_parent[1], &msg_child, unsigned_long_size);
+                read(parent_to_child[0], &msg_temp, unsigned_long_size);
+                write(child_to_parent[1], &msg_child, unsigned_long_size);
+                read(parent_to_child[0], &msg_temp, unsigned_long_size);
+                write(child_to_parent[1], &msg_child, unsigned_long_size);
+                read(parent_to_child[0], &msg_temp, unsigned_long_size);
+                write(child_to_parent[1], &msg_child, unsigned_long_size);
+                read(parent_to_child[0], &msg_temp, unsigned_long_size);
+            }
+        }
+
+        exit(1);
+    }
+
+    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     return 0;
 }
