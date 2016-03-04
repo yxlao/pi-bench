@@ -1,9 +1,9 @@
 CC = g++
 
 
-CPPFILES = $(wildcard *.cpp)
-OFILES = $(patsubst %.cpp,%.o,$(CPPFILES))
-TARGETS = $(patsubst %.cpp,%,$(CPPFILES))
+CCFILES = $(wildcard *.cc)
+OFILES = $(patsubst %.cc,%.o,$(CCFILES))
+TARGETS = $(patsubst %.cc,%,$(CCFILES))
 
 .PRECIOUS: $(OFILES)
 
