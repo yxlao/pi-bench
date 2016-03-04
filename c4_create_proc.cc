@@ -6,8 +6,8 @@
 
 // experiment repetitions
 #define NUM_TRIAL  10000
-#define NUM_ITER   200
-#define NUM_UNROLL 5
+#define NUM_ITER   1
+#define NUM_UNROLL 1
 unsigned long time_trials[NUM_TRIAL];
 
 int main() {
@@ -37,7 +37,7 @@ int main() {
         time_trials[i] = time_end - time_start;
     }
 
-    print_all_stats(time_trials, NUM_TRIAL, 1, 1);
+    print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
 
     return 0;
 }
