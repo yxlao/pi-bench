@@ -10,8 +10,8 @@ unsigned long time_trials[NUM_TRIAL];
 
 int main() {
 
-    RESET_CCNT;
     for (int i = 0; i < NUM_TRIAL; ++i) {
+        RESET_CCNT;
         GET_CCNT(time_start);
         for (int j = 0; j < NUM_ITER; ++j) {
             getppid();
