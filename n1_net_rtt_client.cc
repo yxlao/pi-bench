@@ -68,13 +68,6 @@ int main(int argc, char *argv[]) {
         }
         std::cout << "#### size: " << size << std::endl;
         print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
-
-        // num_bytes = tcp_send(server_fd, send_buf);
-        // printf("sent size %d\n", num_bytes);
-        // assert(num_bytes == size);
-        // num_bytes = tcp_receive(server_fd, recv_buf);
-        // printf("received size %d\n", num_bytes);
-        // assert(num_bytes == size);
     }
 
     tcp_shutdown_close(server_fd);

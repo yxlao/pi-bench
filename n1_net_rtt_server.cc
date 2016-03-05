@@ -35,12 +35,11 @@ int main(void) {
     while (1) {
         // read(client_fd, &recv_buf,1);
         // write(client_fd,"-",1);
-
         num_bytes = tcp_receive(client_fd, recv_buf);
         // printf("received size %d\n", num_bytes);
         num_bytes = tcp_send(client_fd, recv_buf);
         // printf("sent size %d\n", num_bytes);
-        if (num_bytes == 0) { // client is offline, temp solution for now
+        if (num_bytes == 0) { // client is offline
             break;
         }
     }
