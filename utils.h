@@ -26,10 +26,10 @@ unsigned long tval_to_usec(timeval t);
 unsigned long tval_diff_to_usec(timeval tval_start, timeval tval_end);
 
 // util template functions
-float get_mean(unsigned long* data, int num_trial);
-float get_sd(unsigned long* data, int num_trial);
-float get_min(unsigned long* data, int num_trial);
-float get_max(unsigned long* data, int num_trial);
+double get_mean(unsigned long* data, int num_trial);
+double get_sd(unsigned long* data, int num_trial);
+double get_min(unsigned long* data, int num_trial);
+double get_max(unsigned long* data, int num_trial);
 
 // returns the trimmed num_trial
 int trim_outlier(unsigned long* data, int num_trial);
