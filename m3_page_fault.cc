@@ -2,7 +2,7 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h> // for sync, write, and close
+#include <unistd.h> // for sync, write, sysconf and close
 #include <fstream> // for ofstream
 
 // experiment repetitions
