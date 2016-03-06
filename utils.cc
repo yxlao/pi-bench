@@ -10,8 +10,14 @@ unsigned long time_total = 0;
 //        non template functions must be put in utils.cc to
 //        avoid multiple definition
 
-unsigned long time_to_usec(timeval t) {
+unsigned long tval_to_usec(timeval t) {
     return (unsigned long)t.tv_sec * 1000000 + (unsigned long)t.tv_usec;
+}
+
+unsigned long tval_diff_to_usec(timeval tval_start, timeval tval_end) {
+    struct timeval tval_diff;
+    timersub(&tval_end, &tval_start, &tval_diff);
+    return tval_to_usec(tval_diff);
 }
 
 // util template functions
