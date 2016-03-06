@@ -17,8 +17,8 @@ int main(int argc, char *argv[]) {
 
     // int num_bytes;
     char port[] = PORT;
-    char send_buf[MAX_DATA_SIZE];
-    char recv_buf[MAX_DATA_SIZE];
+    char *send_buf = (char *)malloc(sizeof(char) * MAX_DATA_SIZE);
+    char *recv_buf = (char *)malloc(sizeof(char) * MAX_DATA_SIZE);
 
     // connect tcp
     int server_fd = tcp_client_connect(argv[1], port);
@@ -62,6 +62,9 @@ int main(int argc, char *argv[]) {
     }
 
     tcp_shutdown_close(server_fd);
+
+    free(send_buf);
+    free(recv_buf);
 
     return 0;
 }

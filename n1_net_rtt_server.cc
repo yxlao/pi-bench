@@ -9,7 +9,7 @@ int main(void) {
 
     // bind to port
     char port[] = PORT;
-    char recv_buf[MAX_DATA_SIZE];
+    char *recv_buf = (char *)malloc(sizeof(char) * MAX_DATA_SIZE);
     int sockfd = tcp_server_bind(port);
 
     // accept client connection
@@ -37,6 +37,8 @@ int main(void) {
 
     tcp_shutdown_close(client_fd);
     tcp_shutdown_close(sockfd);
+
+    free(recv_buf);
 
     return 0;
 }
