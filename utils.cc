@@ -10,6 +10,10 @@ unsigned long time_total = 0;
 //        non template functions must be put in utils.cc to
 //        avoid multiple definition
 
+unsigned long time_to_usec(timeval *t) {
+    return (unsigned long)t->tv_sec * 1000000 + (unsigned long)t->tv_usec;
+}
+
 // util template functions
 float get_mean(unsigned long* data, int num_trial) {
     // mean
