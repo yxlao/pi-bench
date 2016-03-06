@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         for (int i = 0; i < NUM_TRIAL; ++i) {
             RESET_CCNT;
             GET_CCNT(time_start);
-            for (int j = 0; j < NUM_ITER; ++j) {
+            for (int j = 0; j < NUM_ITER  / 2; ++j) {
                 // write(server_fd,"-",1);
                 // read(server_fd,&recv_buf,1);
                 // write(server_fd,"-",1);
