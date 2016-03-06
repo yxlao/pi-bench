@@ -100,6 +100,8 @@ void print_stats(unsigned long* data, int num_trial, int num_iter,
     float min_val = get_min(data, num_trial);
     float max_val = get_max(data, num_trial);
     float mean_op = mean / (float) num_iter / (float) num_unroll;
+    std::cout.precision(3);
+    std::cout << std::fixed;
     std::cout << "num_trial: " << num_trial << std::endl
               << "num_iter: " << num_iter << std::endl
               << "num_unroll: " << num_unroll << std::endl
