@@ -14,7 +14,7 @@
 #include <sys/wait.h>
 #include <signal.h>
 
-#define MAX_DATA_SIZE 1024
+#define MAX_DATA_SIZE 33554432  // 32MB
 #define MAX_RTT_DATA_SIZE 2
 #define STATE_INIT 1
 #define STATE_RUN  2
