@@ -1,20 +1,10 @@
 #include "utils_tcp.h"
 #include "utils.h"
 #include <stdio.h>
-#include <unistd.h> // for sleep
-#include <assert.h>
 #include <string.h>
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 
 #define PORT "3490" // the port client will be connecting to
-#define NUM_TRIAL  500
+#define NUM_TRIAL  50
 #define NUM_ITER   200
 #define NUM_UNROLL 5
 unsigned long time_trials[NUM_TRIAL];
@@ -65,6 +55,7 @@ int main(int argc, char *argv[]) {
             }
             GET_CCNT(time_end);
             time_trials[i] = time_end - time_start;
+            // printf("trail %d\n", i);
         }
         std::cout << "#### size: " << size << std::endl;
         print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);

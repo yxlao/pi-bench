@@ -1,6 +1,19 @@
 #ifndef TCP_UTILS_H_
 #define TCP_UTILS_H_
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>      // POSIX library
+#include <errno.h>       // error Number, variable errno
+#include <netdb.h>       // network database
+#include <sys/types.h>   // system datatypes, like pthread
+#include <netinet/in.h>  // internet address family, sockaddr_in, in_addr
+#include <sys/socket.h>  // socket library
+#include <arpa/inet.h>   // internet operations, in_addr_t, in_addr
+#include <sys/wait.h>
+#include <signal.h>
+
 #define MAX_DATA_SIZE 1024
 #define MAX_RTT_DATA_SIZE 2
 #define STATE_INIT 1
