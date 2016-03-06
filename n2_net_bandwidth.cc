@@ -5,7 +5,7 @@
 #include <sys/time.h>
 
 #define PORT "3490" // the port client will be connecting to
-#define NUM_TRIAL  10
+#define NUM_TRIAL  100
 #define NUM_ITER   20
 #define NUM_UNROLL 5
 unsigned long time_trials[NUM_TRIAL];
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     int server_fd = tcp_client_connect(argv[1], port);
 
     // set message size in bytes
-    int size = 1024 * 128;
+    int size = 1024 * 256;
 
     // memset bytes to create string length size
     memset(send_buf, '-', size);
