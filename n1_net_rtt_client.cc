@@ -1,20 +1,10 @@
 #include "utils_tcp.h"
 #include "utils.h"
 #include <stdio.h>
-#include <unistd.h> // for sleep
-#include <assert.h>
 #include <string.h>
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 
 #define PORT "3490" // the port client will be connecting to
-#define NUM_TRIAL  500
+#define NUM_TRIAL  50
 #define NUM_ITER   200
 #define NUM_UNROLL 5
 unsigned long time_trials[NUM_TRIAL];
@@ -27,8 +17,8 @@ int main(int argc, char *argv[]) {
 
     // int num_bytes;
     char port[] = PORT;
-    char send_buf[MAX_DATA_SIZE];
-    char recv_buf[MAX_DATA_SIZE];
+    char *send_buf = (char *)malloc(sizeof(char) * MAX_DATA_SIZE);
+    char *recv_buf = (char *)malloc(sizeof(char) * MAX_DATA_SIZE);
 
     // connect tcp
     int server_fd = tcp_client_connect(argv[1], port);
@@ -65,12 +55,16 @@ int main(int argc, char *argv[]) {
             }
             GET_CCNT(time_end);
             time_trials[i] = time_end - time_start;
+            // printf("trail %d\n", i);
         }
         std::cout << "#### size: " << size << std::endl;
         print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
     }
 
     tcp_shutdown_close(server_fd);
+
+    free(send_buf);
+    free(recv_buf);
 
     return 0;
 }
