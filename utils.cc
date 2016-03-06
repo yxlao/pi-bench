@@ -14,6 +14,13 @@ unsigned long tval_to_usec(timeval t) {
     return (unsigned long)t.tv_sec * 1000000 + (unsigned long)t.tv_usec;
 }
 
+// Usage:
+// struct timeval tval_start, tval_end;
+// gettimeofday(&tval_start, NULL);
+// sleep(1);
+// gettimeofday(&tval_end, NULL);
+// unsigned long tval_diff_usec = tval_diff_to_usec(tval_start, tval_end);
+// printf("%lu", tval_diff_usec);
 unsigned long tval_diff_to_usec(timeval tval_start, timeval tval_end) {
     struct timeval tval_diff;
     timersub(&tval_end, &tval_start, &tval_diff);
