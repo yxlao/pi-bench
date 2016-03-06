@@ -5,6 +5,8 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <errno.h>
+#include <string.h>
 #include "utils.h"
 // experiment repetitions
 #define NUM_TRIAL 100
@@ -15,42 +17,35 @@ using namespace std;
 #define CACHE_FLUSH_SIZE 4194304 / 4
 #define BLOCK_SIZE 4096
 
+char buffer[BLOCK_SIZE] __attribute__((aligned(0x1000)));
+
 int main() {
      //define variables
      long long int size =4096;
      srand((unsigned int)time(NULL));    
+     long time_sum = 0;
 
      char filename[128];
-     char * buffer = new char[BLOCK_SIZE];     
 
      struct timeval start, stop;
 
      int file1, file2;
-
+  
      //sequential access
      for (int i = 0; i < 18; i++) {
        
        sprintf (filename, "/home/pi/temp_%lld", size);
     
        file1 = open(filename, O_RDONLY | O_DIRECT); 
-       if (file1 == -1) {
-           cout << "seq open file failed, size: " << size <<  endl;
-       }
-
-       gettimeofday(&start, NULL);
-
-       //counter = 0;	
-       for (long long int k = 0; k < size; k += BLOCK_SIZE) {
-           ssize_t byte = read(file1, buffer, BLOCK_SIZE);
-           if (byte <= 0) {
-              cout << k <<  " seq read end early " << size <<endl;
-              break;
-           }
-       }
   
-       gettimeofday(&stop, NULL);
-	    
-       cout << "size: " << size << " seq: " << ((stop.tv_sec - start.tv_sec) * 1000000L) + stop.tv_usec - start.tv_usec << endl;
+       gettimeofday(&start, NULL);
+       for (long long int k = 0; k < size; k += BLOCK_SIZE) {
+           read(file1, buffer, BLOCK_SIZE);
+       }
+       gettimeofday(&stop, NULL); 
+       double report_size1 = (double) size / (double) 1024 / (double) 1024;
+       double report_time1 = (double) (stop.tv_sec - start.tv_sec) + (double) (stop.tv_usec - start.tv_usec) / (double) 1000000;
+       cout << "size: " << report_size1 << "(Mb) seq: " << report_time1 <<" (s) " << report_size1 / report_time1  << endl;
 	    
        close(file1); 
       
@@ -65,12 +60,9 @@ int main() {
     //random access
     for (int i = 0; i < 18; i++) {
  
-       sprintf (filename, "home/pi/temp_%lld", size);
-      
+       sprintf (filename, "/home/pi/temp_%lld", size);
        file2 = open(filename, O_RDONLY | O_DIRECT);
-       if (file2 == -1) {
-           cout << "rand open file failed, size: " << size << endl;
-       }
+
        int block_num = ceil((double)size / (double)BLOCK_SIZE);
        
        long long int * randInd = new long long int[block_num];
@@ -78,22 +70,17 @@ int main() {
        for (int i = 0; i < block_num; i++) {
            randInd[i] = rand() % block_num * BLOCK_SIZE;
        }
-  
-       gettimeofday(&start, NULL);
        
-       //counter = 0;
+       gettimeofday(&start, NULL); 
        for (long long int k = 0; k < size; k += BLOCK_SIZE) {
            lseek(file2, randInd[k / BLOCK_SIZE], SEEK_SET);
-           ssize_t byte2 = read(file2, buffer, BLOCK_SIZE);
-           if (byte2 <= 0) {
-             cout << k << "rand read end early " << size << endl;
-             break;
-           }
+           read(file2, buffer, BLOCK_SIZE);
        }
-
-       gettimeofday(&stop, NULL); 
-  
-       cout << "size: " << size << " ran: " << ((stop.tv_sec - start.tv_sec) * 1000000L) + stop.tv_usec - start.tv_usec << endl;
+       gettimeofday(&stop, NULL);    
+       
+       double report_size2 = (double) size / (double) 1024 / (double) 1024;
+       double report_time2 = (double) (stop.tv_sec - start.tv_sec) + (double) (stop.tv_usec - start.tv_usec) / (double) 1000000;
+       cout << "size: " << report_size2 << " (Mb) ran: " <<report_time2 <<" (s)" << report_size2 / report_time2 <<  endl;
 
        close(file2);
         
