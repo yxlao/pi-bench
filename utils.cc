@@ -1,7 +1,4 @@
-#include <iostream>
-#include <math.h>
 #include "utils.h"
-using namespace std;
 
 // start and end time
 unsigned long time_start;
@@ -67,8 +64,8 @@ int trim_outlier(unsigned long* data, int num_trial) {
     float sd = get_sd(data, num_trial);
     float min_val = get_min(data, num_trial);
     float max_bound = mean + 3 * sd;
-    max_bound = min(max_bound, min_val * 2);
-    max_bound = min(max_bound, mean * 2);
+    max_bound = std::min(max_bound, min_val * 2);
+    max_bound = std::min(max_bound, mean * 2);
     int write_idx = 0;
     for (int i = 0; i < num_trial; i++) {
         if ((float) data[i] <= max_bound && i > 5) {
