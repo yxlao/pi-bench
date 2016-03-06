@@ -1,7 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <sys/time.h>
+#include <sys/types.h>
+#include <fcntl.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "utils.h"
 // experiment repetitions
 #define NUM_TRIAL 100
@@ -12,60 +15,44 @@ using namespace std;
 #define CACHE_FLUSH_SIZE 4194304 / 4
 #define BLOCK_SIZE 4096
 
-/*
-void try_flush() {
-  ifstream file;
-  char filename[128] = "flush_1073741824";
-  char * buffer = new char[BLOCK_SIZE];
-  file.open(filename, ios::in);
-  for (long long int k = 0; k < 1073741824; k += BLOCK_SIZE) {
-    file.read(buffer, BLOCK_SIZE);
-    if (!file) cout << "flush end early" << endl;
-  }
-  file.close();
-}*/
-
 int main() {
      //define variables
      long long int size =4096;
-     
-     //int counter = 0;   
- 
+     srand((unsigned int)time(NULL));    
+
      char filename[128];
      char * buffer = new char[BLOCK_SIZE];     
 
      struct timeval start, stop;
 
-     ifstream file1, file2;
-     file1.rdbuf() -> pubsetbuf(0, 0);//disable read buffer
-     file2.rdbuf() -> pubsetbuf(0, 0);
+     int file1, file2;
+
      //sequential access
      for (int i = 0; i < 18; i++) {
        
        sprintf (filename, "/home/pi/temp_%lld", size);
     
-       file1.open(filename, ios::in); 
-
-       file1.seekg(0, ios::beg);
+       file1 = open(filename, O_RDONLY | O_DIRECT); 
+       if (file1 == -1) {
+           cout << "seq open file failed, size: " << size <<  endl;
+       }
 
        gettimeofday(&start, NULL);
 
        //counter = 0;	
        for (long long int k = 0; k < size; k += BLOCK_SIZE) {
-           //file1.seekg(k, ios::beg);
-           file1.read(buffer, BLOCK_SIZE);
-           if (!file1) {
+           ssize_t byte = read(file1, buffer, BLOCK_SIZE);
+           if (byte <= 0) {
               cout << k <<  " seq read end early " << size <<endl;
               break;
            }
-           //counter++;
        }
   
        gettimeofday(&stop, NULL);
 	    
        cout << "size: " << size << " seq: " << ((stop.tv_sec - start.tv_sec) * 1000000L) + stop.tv_usec - start.tv_usec << endl;
 	    
-       file1.close(); 
+       close(file1); 
       
        size *= 2;       
       
@@ -80,8 +67,10 @@ int main() {
  
        sprintf (filename, "home/pi/temp_%lld", size);
       
-       file2.open(filename, ios::in);
-
+       file2 = open(filename, O_RDONLY | O_DIRECT);
+       if (file2 == -1) {
+           cout << "rand open file failed, size: " << size << endl;
+       }
        int block_num = ceil((double)size / (double)BLOCK_SIZE);
        
        long long int * randInd = new long long int[block_num];
@@ -90,27 +79,23 @@ int main() {
            randInd[i] = rand() % block_num * BLOCK_SIZE;
        }
   
-       file2.seekg(0, ios::beg);
-       //if (!file2) cout << "file2 fail at the very beginning" << endl;
        gettimeofday(&start, NULL);
+       
        //counter = 0;
        for (long long int k = 0; k < size; k += BLOCK_SIZE) {
-           file2.seekg(randInd[k / BLOCK_SIZE], ios::beg);
-         //  file2.seekg(k, ios::beg);
-         //  cout << "randInd" << randInd[k / BLOCK_SIZE] << endl;
-           file2.read(buffer, BLOCK_SIZE);
-         //  if (!file2){
-           //   cout << "rand read end early" << endl;
-            //  break;
-         //  }
-           //counter ++;
+           lseek(file2, randInd[k / BLOCK_SIZE], SEEK_SET);
+           ssize_t byte2 = read(file2, buffer, BLOCK_SIZE);
+           if (byte2 <= 0) {
+             cout << k << "rand read end early " << size << endl;
+             break;
+           }
        }
 
        gettimeofday(&stop, NULL); 
   
        cout << "size: " << size << " ran: " << ((stop.tv_sec - start.tv_sec) * 1000000L) + stop.tv_usec - start.tv_usec << endl;
 
-       file2.close();
+       close(file2);
         
        size *= 2;
     }//end of random access
