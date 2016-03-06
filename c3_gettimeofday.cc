@@ -2,7 +2,6 @@
 #include <sys/syscall.h>
 #include <sys/time.h>
 #include "utils.h"
-#include <stdio.h>
 
 // experiment repetitions
 #define NUM_TRIAL  10000
