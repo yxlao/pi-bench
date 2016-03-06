@@ -22,7 +22,7 @@ extern unsigned long time_start;
 extern unsigned long time_end;
 extern unsigned long time_total;
 
-unsigned long time_to_usec(timeval *t);
+unsigned long time_to_usec(timeval t);
 
 // util template functions
 float get_mean(unsigned long* data, int num_trial);
