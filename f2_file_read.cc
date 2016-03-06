@@ -33,7 +33,7 @@ int main() {
   
      //sequential access
      for (int i = 0; i < 18; i++) {
-       
+
        sprintf (filename, "/home/pi/temp_%lld", size);
     
        file1 = open(filename, O_RDONLY | O_DIRECT); 
@@ -64,9 +64,9 @@ int main() {
        file2 = open(filename, O_RDONLY | O_DIRECT);
 
        int block_num = ceil((double)size / (double)BLOCK_SIZE);
-       
+
        long long int * randInd = new long long int[block_num];
-  
+
        for (int i = 0; i < block_num; i++) {
            randInd[i] = rand() % block_num * BLOCK_SIZE;
        }
@@ -83,9 +83,9 @@ int main() {
        cout << "size: " << report_size2 << " (Mb) ran: " <<report_time2 <<" (s)" << report_size2 / report_time2 <<  endl;
 
        close(file2);
-        
+
        size *= 2;
     }//end of random access
-     
+
      return 0;
 }
