@@ -11,8 +11,7 @@ sudo umount -l /mnt
 ```
 
 ## NFS set up for host
-[ref 0](https://help.ubuntu.com/community/SettingUpNFSHowTo)
-[ref 1](http://serverfault.com/questions/611007/unable-to-write-to-mount-point-nfs-server-getting-permission-denied)
+Please see [ref 0](https://help.ubuntu.com/community/SettingUpNFSHowTo) and [ref 1](http://serverfault.com/questions/611007/unable-to-write-to-mount-point-nfs-server-getting-permission-denied).
 
 ```sh
 echo /etc/exports

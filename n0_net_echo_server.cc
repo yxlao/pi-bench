@@ -1,14 +1,5 @@
 #include "utils_tcp.h"
 #include "utils.h"
-#include <assert.h>
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 
 #define PORT "3490"  // the port users will be connecting to
 
@@ -18,7 +9,7 @@ int main(void) {
 
     // bind to port
     char port[] = PORT;
-    char recv_buf[MAX_DATA_SIZE];
+    char *recv_buf = (char *)malloc(sizeof(char) * MAX_DATA_SIZE);
     int sockfd = tcp_server_bind(port);
 
     // accept client connection
@@ -46,6 +37,8 @@ int main(void) {
 
     tcp_shutdown_close(client_fd);
     tcp_shutdown_close(sockfd);
+
+    free(recv_buf);
 
     return 0;
 }

@@ -63,6 +63,9 @@ $(OBJS_NETWORK): %.o : %.cc utils.h utils_tcp.h
 	@dos2unix -q $<
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# just the echo server, ARM X86 independent
+server: n0_net_echo_server
+
 # misc
 module:
 	sudo insmod raspbian-ccr/enable-ccr.ko
