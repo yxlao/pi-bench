@@ -8,12 +8,8 @@
 unsigned long time_trials[NUM_TRIAL];
 using namespace std;
 
-#define MAX_INT_ARRAY_SIZE 16777216 / 2 // 32M Bytes
-#define CACHE_FLUSH_SIZE 4194304 / 4
-
 int main() {
      //define variables
-     struct timeval start, stop;
      long long int size = 512;
      int buffer_size = 4096;
      char filename[128];
@@ -25,42 +21,32 @@ int main() {
        ifstream file;
        file.open(filename, ios::in); 
 
-       //RESET_CCNT;
-       //GET_CCNT(time_start);
+       RESET_CCNT;
+       GET_LOW_CCNT(time_start);
 
-       gettimeofday(&start, NULL);    
-       
        for (int k = 0; k < size; k += buffer_size) {
          file.read(buffer, buffer_size);
        }
-       //GET_CCNT(time_end);
+       GET_LOW_CCNT(time_end);
 
-       gettimeofday(&stop, NULL);   
-
-       //unsigned long time_1 = time_end - time_start;
-       cout << "size: " << size << " first: " << ((stop.tv_sec - start.tv_sec) * 1000000L) + stop.tv_usec - start.tv_usec << endl;
+       unsigned long time_1 = (time_end - time_start) * 64;
+       cout << "size: " << size << " first: " << time_1 << endl;
        
        file.clear();
        file.seekg(0, ios::beg);  
 
-       //GET_CCNT(time_start);
-       
-       gettimeofday(&start, NULL);
+       GET_LOW_CCNT(time_start);
        
        for (int k = 0; k < size; k += buffer_size) {
          file.read(buffer, buffer_size);
        }
        
-       //GET_CCNT(time_end);
-       gettimeofday(&stop, NULL);
-       //unsigned long time_2 = time_end - time_start;
-       //cout << "time2 " << stop.tv_usec - start.tv_usec << endl;
+       GET_LOW_CCNT(time_end);
+       unsigned long time_2 = (time_end - time_start) * 64;
         
-       cout << "size: " << size << " second: " << ((stop.tv_sec - start.tv_sec) * 1000000L) + stop.tv_usec - start.tv_usec << endl;
+       cout << "size: " << size << " second: " << time_2  << endl;
        file.close();       
     
-       //print_results
-       //cout << "time 1: " << time_1 << " time 2: " << time_2 << " size: " << size << endl;
        size *= 2;
     }
 
