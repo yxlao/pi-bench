@@ -43,8 +43,7 @@ void child_proc(int sequence, int* pin, int* pout) { // pd = pipe_descriptor
   read(pin[0], NULL, 1);
   close(pin[0]);
 
-
-  RESET_CCNT;
+  // RESET_CCNT;
   GET_CCNT(time1);
   for (size_t i = 0; i < file_size; i += buffer_size) {
     read(fd, data, buffer_size);
@@ -56,7 +55,6 @@ void child_proc(int sequence, int* pin, int* pout) { // pd = pipe_descriptor
   // unsigned long time_block = (time2 - time1) / file_size * block_size;
   // std::cout << params->i << ": (" << time2 << ", " << time1 << ") -> " <<time_block << std::endl;
   unsigned long overhead_block = (time2 - time1) / file_size * block_size;
-  std::cout << sequence << ": " << overhead_block << std::endl;
   write(pout[1], &overhead_block, sizeof(unsigned long));
 
   close(pout[1]);
@@ -64,10 +62,12 @@ void child_proc(int sequence, int* pin, int* pout) { // pd = pipe_descriptor
 
 
 int main() {
-  int pin[2], pout[2];
-  pipe(pin);
-  pipe(pout);
+
+
   for (int count = 1; count <= MAX_THREAD; ++count) {
+    int pin[2], pout[2];
+    pipe(pin);
+    pipe(pout);
     for (int i = 0; i < count; ++i) {
       int pid = fork();
       if (!pid) { // child process
@@ -81,23 +81,25 @@ int main() {
     close(pout[1]);
     close(pin[0]);
     unsigned long overhead = 0;
-    char dummy[] = "g";
+    char dummy = 'g';
     unsigned long overhead_proc;
+    RESET_CCNT;
     for (int i = 0; i < count; ++i) {
       write(pin[1], &dummy, 1);
     }
     for (int i = 0; i < count; ++i) {
       read(pout[0], &overhead_proc, sizeof(unsigned long));
-      std::cout << i << ": " << overhead_proc << std::endl;
       overhead += overhead_proc;
     }
 
     for (int i = 0; i < count; ++i) {
       wait(NULL);
     }
+    std::cout << count << " processes: cycles per block: " << overhead / count << " speed: " << block_size * count * 7e8 / overhead / 1024 << "kB/s"<< std::endl;
     close(pin[1]);
     close(pout[0]);
-    std::cout << count << " processes: cycles per block: " << overhead / count << " speed: " << block_size * count * 7e8 / overhead / 1024 << "kB/s"<< std::endl;
   }
+
+
   return 0;
 }
