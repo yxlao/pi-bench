@@ -11,16 +11,11 @@
 #include "utils.h"
 // experiment repetitions
 #define NUM_TRIAL 100
-#define MAX_THREAD 32
+#define MAX_COUNT 32
 unsigned long time_trials[NUM_TRIAL];
 const long long block_size = 4096;
-const long long buffer_size = 8388608; // 8M * 32 = 256M, manageable
-const long long max_file_size = 16777216;
-pthread_barrier_t barrier;
-struct thread_params {
-  unsigned long long overhead_block;
-  int i;
-};
+size_t buffer_size = 8388608; // 8M * 32 = 256M, manageable
+size_t max_file_size = 512 * 1048576;
 
 void child_proc(int sequence, int* pin, int* pout) { // pd = pipe_descriptor
   int page_size = sysconf(_SC_PAGESIZE);
@@ -64,12 +59,14 @@ void child_proc(int sequence, int* pin, int* pout) { // pd = pipe_descriptor
 int main() {
 
 
-  for (int count = 1; count <= MAX_THREAD; ++count) {
+  for (int count = 1; count <= MAX_COUNT; ++count) {
     int pin[2], pout[2];
     pipe(pin);
     pipe(pout);
     for (int i = 0; i < count; ++i) {
       int pid = fork();
+      for (max_file_size = 16777216; max_file_size * count < 256 * 1048576; max_file_size <<= 1);
+      for (buffer_size = 8 * 1048576; buffer_size * count < 256 * 1048576; buffer_size <<= 1);
       if (!pid) { // child process
         child_proc(i, pin, pout);
         exit(EXIT_SUCCESS);
@@ -81,12 +78,10 @@ int main() {
     close(pout[1]);
     close(pin[0]);
     unsigned long overhead = 0;
-    char dummy = 'g';
+    char dummy[] = "11111111111111111111111111111111";
     unsigned long overhead_proc;
     RESET_CCNT;
-    for (int i = 0; i < count; ++i) {
-      write(pin[1], &dummy, 1);
-    }
+    write(pin[1], &dummy, count);
     for (int i = 0; i < count; ++i) {
       read(pout[0], &overhead_proc, sizeof(unsigned long));
       overhead += overhead_proc;
