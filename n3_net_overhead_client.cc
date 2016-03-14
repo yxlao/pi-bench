@@ -5,7 +5,7 @@
 #include <sys/time.h>
 
 #define PORT "3490" // the port client will be connecting to
-#define NUM_TRIAL  100
+#define NUM_TRIAL  1
 #define NUM_ITER   1
 #define NUM_UNROLL 1
 unsigned long setup_time_trials[NUM_TRIAL];

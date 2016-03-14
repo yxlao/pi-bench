@@ -26,7 +26,6 @@ int main(void) {
 
         num_bytes = tcp_receive(client_fd, recv_buf);
         tcp_shutdown_close(client_fd);
-        tcp_shutdown_close(sockfd);
 
         std::cout << "server setup, receive, teardown" << std::endl;
 
@@ -35,6 +34,8 @@ int main(void) {
         }
     }
 
+    std::cout << "server final clean up" << std::endl;
+    tcp_shutdown_close(sockfd);
     free(recv_buf);
 
     return 0;
