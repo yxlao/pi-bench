@@ -38,17 +38,17 @@ int main(int argc, char *argv[]) {
 
     for (int i = 0; i < NUM_TRIAL; ++i) {
         gettimeofday(&tval_start, NULL);
-        for (int j = 0; j < NUM_ITER / 2; ++j) {
+        for (int j = 0; j < NUM_ITER; ++j) {
             tcp_send(server_fd, send_buf);
-            tcp_receive(server_fd, recv_buf);
+            // tcp_receive(server_fd, recv_buf);
             tcp_send(server_fd, send_buf);
-            tcp_receive(server_fd, recv_buf);
+            // tcp_receive(server_fd, recv_buf);
             tcp_send(server_fd, send_buf);
-            tcp_receive(server_fd, recv_buf);
+            // tcp_receive(server_fd, recv_buf);
             tcp_send(server_fd, send_buf);
-            tcp_receive(server_fd, recv_buf);
+            // tcp_receive(server_fd, recv_buf);
             tcp_send(server_fd, send_buf);
-            tcp_receive(server_fd, recv_buf);
+            // tcp_receive(server_fd, recv_buf);
         }
         gettimeofday(&tval_end, NULL);
         // convert time diff in usec directly to bandwidth
