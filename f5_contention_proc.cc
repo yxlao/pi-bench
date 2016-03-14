@@ -15,6 +15,7 @@
 unsigned long time_trials[NUM_TRIAL];
 const long long block_size = 4096;
 size_t buffer_size = 8388608; // 8M * 32 = 256M, manageable
+// size_t buffer_size = block_size; // match block_size;
 size_t max_file_size = 512 * 1048576;
 
 void child_proc(int sequence, int* pin, int* pout) { // pd = pipe_descriptor
@@ -39,17 +40,17 @@ void child_proc(int sequence, int* pin, int* pout) { // pd = pipe_descriptor
   close(pin[0]);
 
   // RESET_CCNT;
-  GET_CCNT(time1);
+  GET_LOW_CCNT(time1);
   for (size_t i = 0; i < file_size; i += buffer_size) {
     read(fd, data, buffer_size);
   }
-  GET_CCNT(time2);
+  GET_LOW_CCNT(time2);
   close(fd);
   free(data);
 
   // unsigned long time_block = (time2 - time1) / file_size * block_size;
   // std::cout << params->i << ": (" << time2 << ", " << time1 << ") -> " <<time_block << std::endl;
-  unsigned long overhead_block = (time2 - time1) / file_size * block_size;
+  unsigned long overhead_block = 64 * (time2 - time1) / file_size * block_size;
   write(pout[1], &overhead_block, sizeof(unsigned long));
 
   close(pout[1]);
@@ -65,8 +66,10 @@ int main() {
     pipe(pout);
     for (int i = 0; i < count; ++i) {
       int pid = fork();
-      for (max_file_size = 16777216; max_file_size * count < 256 * 1048576; max_file_size <<= 1);
       for (buffer_size = 8 * 1048576; buffer_size * count < 256 * 1048576; buffer_size <<= 1);
+      if (buffer_size > 16777216) {
+        max_file_size = buffer_size;
+      }
       if (!pid) { // child process
         child_proc(i, pin, pout);
         exit(EXIT_SUCCESS);
