@@ -4,7 +4,7 @@
 #include <string.h>
 
 #define PORT "3490" // the port client will be connecting to
-#define NUM_TRIAL  50
+#define NUM_TRIAL  100
 #define NUM_ITER   200
 #define NUM_UNROLL 5
 unsigned long time_trials[NUM_TRIAL];
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         for (int i = 0; i < NUM_TRIAL; ++i) {
             RESET_CCNT;
             GET_CCNT(time_start);
-            for (int j = 0; j < NUM_ITER  / 2; ++j) {
+            for (int j = 0; j < NUM_ITER; ++j) {
                 // write(server_fd,"-",1);
                 // read(server_fd,&recv_buf,1);
                 // write(server_fd,"-",1);
