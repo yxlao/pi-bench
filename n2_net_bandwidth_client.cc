@@ -6,8 +6,8 @@
 
 #define PORT "3490" // the port client will be connecting to
 #define NUM_TRIAL  100
-#define NUM_ITER   20
-#define NUM_UNROLL 5
+#define NUM_ITER   1
+#define NUM_UNROLL 1
 unsigned long time_trials[NUM_TRIAL];
 
 int main(int argc, char *argv[]) {
@@ -39,14 +39,6 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < NUM_TRIAL; ++i) {
         gettimeofday(&tval_start, NULL);
         for (int j = 0; j < NUM_ITER; ++j) {
-            tcp_send(server_fd, send_buf);
-            // tcp_receive(server_fd, recv_buf);
-            tcp_send(server_fd, send_buf);
-            // tcp_receive(server_fd, recv_buf);
-            tcp_send(server_fd, send_buf);
-            // tcp_receive(server_fd, recv_buf);
-            tcp_send(server_fd, send_buf);
-            // tcp_receive(server_fd, recv_buf);
             tcp_send(server_fd, send_buf);
             // tcp_receive(server_fd, recv_buf);
         }

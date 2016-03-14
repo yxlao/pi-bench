@@ -15,7 +15,7 @@
 #include <signal.h>
 
 #define MAX_DATA_SIZE 33554432  // 32MB
-#define MAX_RTT_DATA_SIZE 2
+#define MAX_RTT_DATA_SIZE 1024
 #define MAX_NUMMY_DATA_SIZE 32
 #define GOODBYE_DATA_SIZE 71
 #define STATE_INIT 1
