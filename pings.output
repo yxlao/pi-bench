@@ -1,0 +1,110 @@
+PING localhost (127.0.0.1) 13(41) bytes of data.
+
+--- localhost ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19795ms
+rtt min/avg/max/mdev = 0.130/0.150/0.215/0.025 ms
+PING localhost (127.0.0.1) 14(42) bytes of data.
+
+--- localhost ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19791ms
+rtt min/avg/max/mdev = 0.130/0.162/0.281/0.028 ms
+PING localhost (127.0.0.1) 16(44) bytes of data.
+
+--- localhost ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19801ms
+rtt min/avg/max/mdev = 0.127/0.157/0.183/0.017 ms
+PING localhost (127.0.0.1) 20(48) bytes of data.
+
+--- localhost ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19802ms
+rtt min/avg/max/mdev = 0.129/0.166/0.223/0.019 ms
+PING localhost (127.0.0.1) 28(56) bytes of data.
+
+--- localhost ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19802ms
+rtt min/avg/max/mdev = 0.130/0.157/0.246/0.025 ms
+PING localhost (127.0.0.1) 44(72) bytes of data.
+
+--- localhost ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19791ms
+rtt min/avg/max/mdev = 0.132/0.151/0.194/0.020 ms
+PING localhost (127.0.0.1) 76(104) bytes of data.
+
+--- localhost ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19792ms
+rtt min/avg/max/mdev = 0.130/0.145/0.187/0.019 ms
+PING localhost (127.0.0.1) 140(168) bytes of data.
+
+--- localhost ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19797ms
+rtt min/avg/max/mdev = 0.130/0.156/0.211/0.019 ms
+PING localhost (127.0.0.1) 268(296) bytes of data.
+
+--- localhost ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19802ms
+rtt min/avg/max/mdev = 0.132/0.154/0.218/0.022 ms
+PING localhost (127.0.0.1) 524(552) bytes of data.
+
+--- localhost ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19799ms
+rtt min/avg/max/mdev = 0.137/0.168/0.479/0.039 ms
+PING localhost (127.0.0.1) 1036(1064) bytes of data.
+
+--- localhost ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19791ms
+rtt min/avg/max/mdev = 0.139/0.157/0.254/0.020 ms
+PING 192.168.0.18 (192.168.0.18) 13(41) bytes of data.
+
+--- 192.168.0.18 ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19798ms
+rtt min/avg/max/mdev = 0.361/0.433/0.494/0.031 ms
+PING 192.168.0.18 (192.168.0.18) 14(42) bytes of data.
+
+--- 192.168.0.18 ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19804ms
+rtt min/avg/max/mdev = 0.346/0.428/0.585/0.043 ms
+PING 192.168.0.18 (192.168.0.18) 16(44) bytes of data.
+
+--- 192.168.0.18 ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19794ms
+rtt min/avg/max/mdev = 0.346/0.427/0.489/0.036 ms
+PING 192.168.0.18 (192.168.0.18) 20(48) bytes of data.
+
+--- 192.168.0.18 ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19794ms
+rtt min/avg/max/mdev = 0.352/0.424/0.527/0.032 ms
+PING 192.168.0.18 (192.168.0.18) 28(56) bytes of data.
+
+--- 192.168.0.18 ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19794ms
+rtt min/avg/max/mdev = 0.352/0.423/0.487/0.041 ms
+PING 192.168.0.18 (192.168.0.18) 44(72) bytes of data.
+
+--- 192.168.0.18 ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19794ms
+rtt min/avg/max/mdev = 0.358/0.430/0.494/0.041 ms
+PING 192.168.0.18 (192.168.0.18) 76(104) bytes of data.
+
+--- 192.168.0.18 ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19794ms
+rtt min/avg/max/mdev = 0.366/0.446/0.506/0.036 ms
+PING 192.168.0.18 (192.168.0.18) 140(168) bytes of data.
+
+--- 192.168.0.18 ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19804ms
+rtt min/avg/max/mdev = 0.518/0.605/0.703/0.035 ms
+PING 192.168.0.18 (192.168.0.18) 268(296) bytes of data.
+
+--- 192.168.0.18 ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19794ms
+rtt min/avg/max/mdev = 0.553/0.633/0.726/0.037 ms
+PING 192.168.0.18 (192.168.0.18) 524(552) bytes of data.
+
+--- 192.168.0.18 ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19794ms
+rtt min/avg/max/mdev = 0.621/0.727/1.209/0.104 ms
+PING 192.168.0.18 (192.168.0.18) 1036(1064) bytes of data.
+
+--- 192.168.0.18 ping statistics ---
+100 packets transmitted, 100 received, 0% packet loss, time 19830ms
+rtt min/avg/max/mdev = 0.756/0.852/1.155/0.074 ms
