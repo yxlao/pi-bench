@@ -28,31 +28,31 @@ void flush_read(int* data, int max_ind) {
 }
 
 int main() {
-     // init data
-     int temp;
-     int* data = new int[MAX_INT_ARRAY_SIZE];
-     int* cache_data = new int[CACHE_FLUSH_SIZE];
-     flush_write(data, MAX_INT_ARRAY_SIZE);
-     flush_write(cache_data, CACHE_FLUSH_SIZE);
+    // init data
+    int temp;
+    int* data = new int[MAX_INT_ARRAY_SIZE];
+    int* cache_data = new int[CACHE_FLUSH_SIZE];
+    flush_write(data, MAX_INT_ARRAY_SIZE);
+    flush_write(cache_data, CACHE_FLUSH_SIZE);
 
-     // experiments
-     for (int i = 0; i < NUM_TRIAL; i++) {
-          flush_write(cache_data, CACHE_FLUSH_SIZE);
-          flush_read(cache_data, CACHE_FLUSH_SIZE);
-          RESET_CCNT;
-          GET_CCNT(time_start);
-          for (int j = 0; j < MAX_INT_ARRAY_SIZE; j += 4) {
-               temp = data[j];
-          }
-          GET_CCNT(time_end);
-          time_trials[i] = time_end - time_start;
-     }
+    // experiments
+    for (int i = 0; i < NUM_TRIAL; i++) {
+        flush_write(cache_data, CACHE_FLUSH_SIZE);
+        flush_read(cache_data, CACHE_FLUSH_SIZE);
+        RESET_CCNT;
+        GET_CCNT(time_start);
+        for (int j = 0; j < MAX_INT_ARRAY_SIZE; j += 4) {
+             temp = data[j];
+        }
+        GET_CCNT(time_end);
+        time_trials[i] = time_end - time_start;
+    }
 
-     // print results
-     print_all_stats(time_trials, NUM_TRIAL, 1, 1);
+    // print results
+    print_all_stats(time_trials, NUM_TRIAL, 1, 1);
 
-     // clen-ups
-     (void) temp;
-     delete data;
-     return 0;
+    // clen-ups
+    (void) temp;
+    delete data;
+    return 0;
 }
