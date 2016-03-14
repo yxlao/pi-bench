@@ -4,8 +4,12 @@
 #include <stdlib.h>
 #include "utils.h"
 // experiment repetitions
-#define NUM_TRIAL 100
-unsigned long time_trials[NUM_TRIAL];
+#define NUM_TRIAL 1
+#define NUM_ITER 1
+#define NUM_UNROLL 1
+unsigned long time_trials_1[NUM_TRIAL];
+unsigned long time_trials_2[NUM_TRIAL];
+
 using namespace std;
 
 int main() {
@@ -21,6 +25,9 @@ int main() {
        ifstream file;
        file.open(filename, ios::in); 
 
+       for (int j = 0; j < NUM_TRIAL; j++) {
+       file.clear();
+       file.seekg(0, ios::beg);
        RESET_CCNT;
        GET_LOW_CCNT(time_start);
 
@@ -29,9 +36,11 @@ int main() {
        }
        GET_LOW_CCNT(time_end);
 
-       unsigned long time_1 = (time_end - time_start) * 64;
-       cout << "size: " << size << " first: " << time_1 << endl;
+       //unsigned long time_1 = (time_end - time_start) * 64;
+       //cout << "size: " << size << " first: " << time_1 << endl;
        
+       time_trials_1[j] = (time_end - time_start) * 64;
+
        file.clear();
        file.seekg(0, ios::beg);  
 
@@ -42,15 +51,24 @@ int main() {
        }
        
        GET_LOW_CCNT(time_end);
-       unsigned long time_2 = (time_end - time_start) * 64;
+       //unsigned long time_2 = (time_end - time_start) * 64;
         
-       cout << "size: " << size << " second: " << time_2  << endl;
+       //cout << "size: " << size << " second: " << time_2  << endl;
+       time_trials_2[j] = (time_end - time_start) * 64;
+       }
+       cout << "size:(Mb) " << (double)size / (double) 1024 / (double) 1024 << " first read " << endl;  
+       print_all_stats(time_trials_1, NUM_TRIAL, NUM_ITER, NUM_UNROLL);       
+       
+       cout << " " << endl;
+
+       cout << "size:(Mb) " << (double)size / (double) 1024 / (double) 1024 << " second read " << endl;  
+       print_all_stats(time_trials_2, NUM_TRIAL, NUM_ITER, NUM_UNROLL); 
+
+       cout << " " << endl;      
        file.close();       
     
        size *= 2;
     }
-
-
-     // clean-ups
-     return 0;
+    // clean-ups
+    return 0;
 }
