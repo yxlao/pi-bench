@@ -90,7 +90,7 @@ int main() {
     for (int i = 0; i < count; ++i) {
       wait(NULL);
     }
-    std::cout << count << " processes: cycles per block: " << overhead / count << " speed: " << block_size * count * 7e8 / overhead / 1024 << "kB/s"<< std::endl;
+    std::cout << " #proc, #cycles, speed/block/thread: " << count << "\t" << overhead / count << "\t" << block_size * count * 7e8 / overhead / 1024 << "kB/s"<< std::endl;
     close(pin[1]);
     close(pout[0]);
   }
