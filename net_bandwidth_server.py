@@ -21,9 +21,10 @@ if __name__ == "__main__":
     print 'client address: ', addr
 
     for size in sizes:
+        print "switched to size %s" % size
         for trail in range(num_trail):
             data_recv = reliable_recv(conn, size)
-            print 'redeived %s bytes' % len(data_recv)
+            # print 'redeived %s bytes' % len(data_recv)
 
     # clean up
     conn.close()

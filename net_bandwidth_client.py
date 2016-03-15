@@ -5,14 +5,14 @@ import math
 import numpy as np
 
 sizes = [int(math.pow(2,i)) for i in range(10, 25)]
-num_trail = 3
-port = 50016
+num_trail = 1000
+port = 50017
 
 def time_size_to_bandwidth(time, size):
     """
     time in sec, size in bytes, return in MB/s
     """
-    return float(size) / float(time) / float(1024 * 1024)
+    return float(size) / float(time) / float(1024 * 1024) / 8
 
 def times_size_to_bandwidths(times, size):
     bandwidths = []
@@ -21,13 +21,20 @@ def times_size_to_bandwidths(times, size):
     return bandwidths
 
 def reliable_recv(skt, size):
-    buffer = "" 
-    while len(buffer) < size: 
-        data = skt.recv(size-len(buffer)) 
-        if not data: 
+    received_bytes = 0
+    while received_bytes < size:
+        data = skt.recv(size - received_bytes) 
+        if not data:
             break
-        buffer += data
-    return buffer
+        received_bytes += len(data)
+    return ""
+    # buffer = "" 
+    # while len(buffer) < size: 
+    #     data = skt.recv(size-len(buffer)) 
+    #     if not data: 
+    #         break
+    #     buffer += data
+    # return buffer
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -52,10 +59,10 @@ if __name__ == "__main__":
         # experiments
         for trail in range(num_trail):
             time_start = time.time()
-            num_bytes = skt.send(data_send)
+            num_bytes = skt.sendall(data_send)
             time_end = time.time()
             times.append(time_end - time_start)
-            print 'sent %s bytes' % num_bytes
+            # print 'sent %s bytes' % num_bytes
 
         # print stats
         bandwidths = times_size_to_bandwidths(times, size)
