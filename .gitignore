@@ -15,4 +15,4 @@
 *.order
 *.symvers
 *.tmp_versions/
-.DS_Store
+*.pyc

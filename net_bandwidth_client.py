@@ -1,6 +1,33 @@
 import socket
 import time
 import sys
+import math
+import numpy as np
+
+sizes = [int(math.pow(2,i)) for i in range(10, 25)]
+num_trail = 3
+port = 50016
+
+def time_size_to_bandwidth(time, size):
+    """
+    time in sec, size in bytes, return in MB/s
+    """
+    return float(size) / float(time) / float(1024 * 1024)
+
+def times_size_to_bandwidths(times, size):
+    bandwidths = []
+    for time in times:
+        bandwidths.append(time_size_to_bandwidth(time, size))
+    return bandwidths
+
+def reliable_recv(skt, size):
+    buffer = "" 
+    while len(buffer) < size: 
+        data = skt.recv(size-len(buffer)) 
+        if not data: 
+            break
+        buffer += data
+    return buffer
 
 
 if __name__ == "__main__":
@@ -10,26 +37,42 @@ if __name__ == "__main__":
 
     # specify host and port
     host = sys.argv[1]
-    port = 50015
 
     # establish connection
     skt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     skt.connect((host, port))
+    skt.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-    # determine size
-    size = 1024
+    for size in sizes:
+        # prepare data
+        data_send = '0' * size
 
-    # prepare data
-    data = '1' * size
+        # init array for saving time
+        times = []
 
-    # init array for saving time
-    times = []
+        # experiments
+        for trail in range(num_trail):
+            time_start = time.time()
 
-    # send the data!
-    time_start = time.time()
-    skt.send(data)
-    time_end = time.time()
-    times.append(time_end - time_start)
+            # skt.send(data_send)
+            # data_recv = skt.recv(size)
+
+            num_bytes = skt.send(data_send)
+            data_recv = reliable_recv(skt, size)
+
+            time_end = time.time()
+            times.append((time_end - time_start) / 2)
+
+            print 'sent %s bytes' % num_bytes
+            print 'redeived %s bytes' % len(data_recv)
+
+            # time.sleep(1)
+            print size
+
+        # print stats
+        bandwidths = times_size_to_bandwidths(times, size)
+        print ("bandwidth, size, %s, mean, %s, std, %s, max, %s" % 
+               (size, np.mean(bandwidths), np.std(bandwidths), np.max(bandwidths)))
 
     # clean up
     skt.close()
