@@ -6,7 +6,7 @@
 
 #define PORT "3490" // the port client will be connecting to
 #define NUM_TRIAL  1000
-#define NUM_ITER   1
+#define NUM_ITER   10
 #define NUM_UNROLL 5
 unsigned long time_trials[NUM_TRIAL];
 
