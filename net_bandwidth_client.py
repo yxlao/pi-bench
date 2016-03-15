@@ -12,7 +12,7 @@ def time_size_to_bandwidth(time, size):
     """
     time in sec, size in bytes, return in MB/s
     """
-    return float(size) / float(time) / float(1024 * 1024) / 8
+    return float(size) / float(time) / float(1024 * 1024)
 
 def times_size_to_bandwidths(times, size):
     bandwidths = []
