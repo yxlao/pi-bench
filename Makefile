@@ -73,6 +73,8 @@ module:
 temp:
 	sudo /opt/vc/bin/vcgencmd measure_temp
 
+network: $(BINS_NETWORK)
+
 .PRECIOUS: $(OBJS)
 
 .PHONY: clean all temp module
