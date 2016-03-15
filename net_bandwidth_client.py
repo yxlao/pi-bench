@@ -4,7 +4,7 @@ import sys
 import math
 import numpy as np
 
-sizes = [int(math.pow(2,i)) for i in range(10, 25)]
+sizes = [int(math.pow(2,i)) for i in range(10, 24)]
 num_trail = 1000
 port = 50017
 
@@ -23,15 +23,15 @@ def times_size_to_bandwidths(times, size):
 def reliable_recv(skt, size):
     received_bytes = 0
     while received_bytes < size:
-        data = skt.recv(size - received_bytes) 
+        data = skt.recv(size - received_bytes)
         if not data:
             break
         received_bytes += len(data)
     return ""
-    # buffer = "" 
-    # while len(buffer) < size: 
-    #     data = skt.recv(size-len(buffer)) 
-    #     if not data: 
+    # buffer = ""
+    # while len(buffer) < size:
+    #     data = skt.recv(size-len(buffer))
+    #     if not data:
     #         break
     #     buffer += data
     # return buffer
@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
         # print stats
         bandwidths = times_size_to_bandwidths(times, size)
-        print ("bandwidth, size, %s, mean, %s, std, %s, max, %s" % 
+        print ("bandwidth, size, %s, mean, %s, std, %s, max, %s" %
                (size, np.mean(bandwidths), np.std(bandwidths), np.max(bandwidths)))
 
     # clean up
