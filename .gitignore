@@ -16,3 +16,5 @@
 *.symvers
 *.tmp_versions/
 *.pyc
+.DS_Store
+*.swp
