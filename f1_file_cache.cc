@@ -24,11 +24,9 @@ int main() {
      
      //experiment
      for (int m = 0; m < NUM_TRIAL; m++) {
-     cout << "trial: " << m << endl;
      //do num_trial in outer loop to minimize the cache effect of repeat experiment
        for (int i = 0; i < 7; i++) {
          long long int cur_size = size[i]; 
-         cout << "size: " << cur_size << endl;
          sprintf (filename, "/home/pi/temp_%lld", cur_size);
          ifstream file;
          file.open(filename, ios::in); 
