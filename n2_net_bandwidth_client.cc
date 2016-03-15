@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     int server_fd = tcp_client_connect(argv[1], port);
 
     // set message size in bytes
-    int size = 2 * 1024 * 1024;
+    int size = 256 * 1024;
 
     // memset bytes to create string length size
     memset(send_buf, '-', MAX_DATA_SIZE);
