@@ -29,7 +29,6 @@ def reliable_recv(skt, size):
         buffer += data
     return buffer
 
-
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print "plese specify host ip"
@@ -53,21 +52,10 @@ if __name__ == "__main__":
         # experiments
         for trail in range(num_trail):
             time_start = time.time()
-
-            # skt.send(data_send)
-            # data_recv = skt.recv(size)
-
             num_bytes = skt.send(data_send)
-            data_recv = reliable_recv(skt, size)
-
             time_end = time.time()
-            times.append((time_end - time_start) / 2)
-
+            times.append(time_end - time_start)
             print 'sent %s bytes' % num_bytes
-            print 'redeived %s bytes' % len(data_recv)
-
-            # time.sleep(1)
-            print size
 
         # print stats
         bandwidths = times_size_to_bandwidths(times, size)

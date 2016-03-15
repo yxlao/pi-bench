@@ -21,12 +21,9 @@ if __name__ == "__main__":
     print 'client address: ', addr
 
     for size in sizes:
-        data_send = '0' * size
         for trail in range(num_trail):
             data_recv = reliable_recv(conn, size)
             print 'redeived %s bytes' % len(data_recv)
-            num_bytes = conn.send(data_send)
-            print 'sent %s bytes' % num_bytes
 
     # clean up
     conn.close()
