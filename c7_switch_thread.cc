@@ -4,8 +4,8 @@
 #include <unistd.h>
 #include "utils.h"
 
-#define NUM_TRIAL  1000
-#define NUM_ITER   200
+#define NUM_TRIAL  10000
+#define NUM_ITER   20
 #define NUM_UNROLL 5
 unsigned long time_trials[NUM_TRIAL];
 
