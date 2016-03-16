@@ -9,7 +9,7 @@
 #include <string.h>
 #include "utils.h"
 // experiment repetitions
-#define NUM_TRIAL 1
+#define NUM_TRIAL 10
 #define NUM_ITER 1
 #define NUM_UNROLL 1
 unsigned long time_trials[8][NUM_TRIAL];
@@ -31,9 +31,10 @@ int main(int argc, char *argv[]) {
 
     for (int j = 0; j < NUM_TRIAL; j++) {
       size = 2 * 1024 * 1024;
+      cout << j << endl;
       //random access
       for (int i = 0; i < 8; i++) {
-
+        cout << "size is: " << size << endl;
         sprintf (filename, "/home/pi/temp_%lld", size);
         if (argc == 2) {
           sprintf(filename, "/home/pi/nfs/temp_%lld", size);
@@ -66,6 +67,7 @@ int main(int argc, char *argv[]) {
       cout << "rand access, size is: " << size << endl;
       print_all_stats(time_trials[k], NUM_TRIAL, NUM_ITER, NUM_UNROLL);
       cout << " " << endl;
+      size *= 2;
     }
     return 0;
 }
