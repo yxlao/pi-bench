@@ -4,8 +4,8 @@
 #include <string.h>
 
 #define PORT "3490" // the port client will be connecting to
-#define NUM_TRIAL  100
-#define NUM_ITER   200
+#define NUM_TRIAL  1000
+#define NUM_ITER   2
 #define NUM_UNROLL 5
 unsigned long time_trials[NUM_TRIAL];
 
@@ -55,7 +55,6 @@ int main(int argc, char *argv[]) {
             }
             GET_CCNT(time_end);
             time_trials[i] = time_end - time_start;
-            // printf("trail %d\n", i);
         }
         std::cout << "#### size: " << size << std::endl;
         print_all_stats(time_trials, NUM_TRIAL, NUM_ITER, NUM_UNROLL);
