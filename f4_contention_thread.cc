@@ -42,23 +42,24 @@ void* file_read_thread(void* void_params) {
   pthread_barrier_wait(&barrier);
 
   RESET_CCNT;
-  GET_CCNT(time1);
+  GET_LOW_CCNT(time1);
   for (size_t i = 0; i < file_size; i += buffer_size) {
     read(fd, data, buffer_size);
   }
-  GET_CCNT(time2);
+  GET_LOW_CCNT(time2);
   close(fd);
   free(data);
 
   // unsigned long time_block = (time2 - time1) / file_size * block_size;
   // std::cout << params->i << ": (" << time2 << ", " << time1 << ") -> " <<time_block << std::endl;
-  params->overhead_block = (time2 - time1) / file_size * block_size;
+  params->overhead_block = (time2 - time1) * block_size / file_size;
 
   return NULL;
 }
 
 
 int main() {
+  int file_no = 0;
   for (int count = 1; count <= MAX_THREAD; ++count) {
     pthread_t* threads = (pthread_t*) calloc( count, sizeof(pthread_t) );
     pthread_barrier_init(&barrier, NULL, count);
@@ -66,8 +67,9 @@ int main() {
 
     for (int i = 0; i < count; ++i) {
       arr_params[i].overhead_block = 0;
-      arr_params[i].i = i;
+      arr_params[i].i = file_no;
       pthread_create(&(threads[i]), NULL, file_read_thread, (void*) (&(arr_params[i])));
+      file_no = (file_no + 1) % 64;
     }
 
     long long overhead = 0;
@@ -79,7 +81,7 @@ int main() {
     free( threads );
     free( arr_params );
 
-    std::cout << count << " threads: cycles per block: " << overhead / count << " speed: " << block_size * count * 7e8 / overhead / 1024 << "kB/s"<< std::endl;
+    std::cout << "#threads, cycles/block, speed: " << count << "\t" << overhead / count << "\t" << block_size * count * 7e8 / 64 / overhead / 1024 << "kB/s"<< std::endl;
   }
   return 0;
 }
