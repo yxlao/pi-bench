@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "utils.h"
 // experiment repetitions
-#define NUM_TRIAL 100
+#define NUM_TRIAL 10
 #define NUM_ITER 1
 #define NUM_UNROLL 1
 unsigned long time_trials_first[7][NUM_TRIAL];
