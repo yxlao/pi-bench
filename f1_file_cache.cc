@@ -1,10 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <sys/time.h>
+#include <sys/types.h>
+#include <fcntl.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <errno.h>
 #include "utils.h"
 // experiment repetitions
-#define NUM_TRIAL 10
+#define NUM_TRIAL 100
 #define NUM_ITER 1
 #define NUM_UNROLL 1
 unsigned long time_trials_first[7][NUM_TRIAL];
@@ -28,35 +32,42 @@ int main() {
        for (int i = 0; i < 7; i++) {
          long long int cur_size = size[i]; 
          sprintf (filename, "/home/pi/temp_%lld", cur_size);
-         ifstream file;
-         file.open(filename, ios::in); 
-         file.clear();
-         file.seekg(0, ios::beg);
-
+         int file;
+         file = open(filename, O_RDONLY);
+         lseek(file, 0, SEEK_END);
          RESET_CCNT;
-
+         
          //read first time
          GET_LOW_CCNT(time_start);
          for (int k = 0; k < cur_size; k += buffer_size) {
-           file.read(buffer, buffer_size);
+           if (k == 0) {
+             lseek(file, -1 * buffer_size, SEEK_CUR);
+           } else {
+             lseek(file, -2 * buffer_size, SEEK_CUR);
+           }
+           read(file, buffer, buffer_size);
          }
          GET_LOW_CCNT(time_end);
 
          time_trials_first[i][m] = (time_end - time_start);
 
-         file.clear();
-         file.seekg(0, ios::beg);  
+         lseek(file, 0, SEEK_END);
          RESET_CCNT;
          
          //read second time
          GET_LOW_CCNT(time_start);
        
          for (int k = 0; k < cur_size; k += buffer_size) {
-           file.read(buffer, buffer_size);
+           if (k == 0) {
+             lseek(file, -1 * buffer_size, SEEK_CUR);
+           } else {
+             lseek(file, -2 * buffer_size, SEEK_CUR);
+           }
+           read(file, buffer, buffer_size);
          }  
          GET_LOW_CCNT(time_end);
          time_trials_second[i][m] = (time_end - time_start);    
-         file.close();       
+         close(file);       
       }
     }
 
