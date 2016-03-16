@@ -9,10 +9,10 @@
 #include <string.h>
 #include "utils.h"
 // experiment repetitions
-#define NUM_TRIAL 10
+#define NUM_TRIAL 100
 #define NUM_ITER 1
 #define NUM_UNROLL 1
-unsigned long time_trials[8][NUM_TRIAL];
+unsigned long time_trials[6][NUM_TRIAL];
 using namespace std;
 
 #define MAX_INT_ARRAY_SIZE 16777216 / 2 // 32M Bytes
@@ -30,15 +30,12 @@ int main(int argc, char *argv[]) {
     int file2;
 
     for (int j = 0; j < NUM_TRIAL; j++) {
-      size = 2 * 1024 * 1024;
+      size = 8 * 1024 * 1024;
       cout << j << endl;
       //random access
-      for (int i = 0; i < 8; i++) {
+      for (int i = 0; i < 6; i++) {
         cout << "size is: " << size << endl;
         sprintf (filename, "/home/pi/temp_%lld", size);
-        if (argc == 2) {
-          sprintf(filename, "/home/pi/nfs/temp_%lld", size);
-        }
         file2 = open(filename, O_RDONLY | O_DIRECT);
 
         int block_num = ceil((double)size / (double)BLOCK_SIZE);
@@ -62,8 +59,8 @@ int main(int argc, char *argv[]) {
     }//end of random access
    
     //print all results
-    size = 2 * 1024 * 1024;
-    for (int k = 0; k < 8; k++) {
+    size = 8 * 1024 * 1024;
+    for (int k = 0; k < 6; k++) {
       cout << "rand access, size is: " << size << endl;
       print_all_stats(time_trials[k], NUM_TRIAL, NUM_ITER, NUM_UNROLL);
       cout << " " << endl;
